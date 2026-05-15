@@ -1,1 +1,8 @@
-{}
+{
+  "NotFoundPage": {
+    "description": "Sorry, the page you visited does not exist.",
+    "goBack": "Back previous page",
+    "goHome": "Back home",
+    "title": "Page not found"
+  }
+}
