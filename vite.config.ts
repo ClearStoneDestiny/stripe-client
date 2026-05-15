@@ -11,6 +11,7 @@ export default defineConfig(() => {
     resolve: {
       alias: {
         "@auth": path.resolve(__dirname, "src/modules/auth"),
+        "@common": path.resolve(__dirname, "src/modules/common"),
         "@components": path.resolve(__dirname, "src/components"),
         "@api": path.resolve(__dirname, "src/api"),
         "@locales": path.resolve(__dirname, "src/locales"),

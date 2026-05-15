@@ -24,8 +24,9 @@
     "baseUrl": ".",
     "paths": {
       "@auth/*": ["src/modules/auth/*"],
+      "@common/*": ["src/modules/common/*"],
       "@api/*": ["src/api/*"],
-      "@components/*": ["src/components"],
+      "@components/*": ["src/components/*"],
       "@locales/*": ["src/locales/*"],
       "@config/*": ["src/config/*"],
       "@routes/*": ["src/routes/*"],
@@ -35,7 +36,7 @@
       "@i18n/*": ["src/i18n/*"],
       "@theme/*": ["src/theme/*"],
       "@test/*": ["src/test/*"],
-      "@assets/*": ["src/assets"],
+      "@assets/*": ["src/assets/*"],
       "src/*": ["src/*"]
     }
   },
