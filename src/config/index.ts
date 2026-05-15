@@ -12,5 +12,7 @@ export default {
 
   VALIDATION: {
     NAME_REGEX: /^[\p{L}]+$/u,
+    PASSWORD_REGEX:
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()[\]{}\-_=+\\|;:'",<.>/?`~]).+$/,
   },
 };
