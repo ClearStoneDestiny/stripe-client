@@ -19,7 +19,26 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    "baseUrl": ".",
+    "paths": {
+      "@auth/*": ["src/modules/auth/*"],
+      "@common/*": ["src/modules/common/*"],
+      "@api/*": ["src/api/*"],
+      "@components/*": ["src/components/*"],
+      "@locales/*": ["src/locales/*"],
+      "@config/*": ["src/config/*"],
+      "@routes/*": ["src/routes/*"],
+      "@providers/*": ["src/providers/*"],
+      "@store/*": ["src/store/*"],
+      "@utils/*": ["src/utils/*"],
+      "@i18n/*": ["src/i18n/*"],
+      "@theme/*": ["src/theme/*"],
+      "@test/*": ["src/test/*"],
+      "@assets/*": ["src/assets/*"],
+      "src/*": ["src/*"]
+    }
   },
   "include": ["src"]
 }
