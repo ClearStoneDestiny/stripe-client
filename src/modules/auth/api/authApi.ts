@@ -1,10 +1,17 @@
 import { API_ENDPOINTS } from "@api/constants/apiEndpoints";
 import { apiSlice } from "@api/slices/apiSlice";
+import type { IGetMeOutput } from "@auth/interfaces/iGetMeOutput";
 import type { ILoginInput } from "@auth/interfaces/iLoginInput";
 import type { ILoginOutput } from "@auth/interfaces/iLoginOutput";
 
 export const authApi = apiSlice.injectEndpoints({
   endpoints: (build) => ({
+    // Current user query
+    getMe: build.query<IGetMeOutput, void>({
+      query: () => API_ENDPOINTS.AUTH.GET_ME,
+      providesTags: ["User"],
+    }),
+
     // Login mutation
     login: build.mutation<ILoginOutput, ILoginInput>({
       query: (body) => ({
@@ -12,6 +19,7 @@ export const authApi = apiSlice.injectEndpoints({
         method: "POST",
         body,
       }),
+      invalidatesTags: ["User"],
       extraOptions: { skipRedirect: true },
     }),
 
@@ -32,9 +40,14 @@ export const authApi = apiSlice.injectEndpoints({
         url: API_ENDPOINTS.AUTH.LOGOUT,
         method: "POST",
       }),
+      invalidatesTags: ["User"],
     }),
   }),
 });
 
-export const { useLoginMutation, useRefreshMutation, useLogoutMutation } =
-  authApi;
+export const {
+  useGetMeQuery,
+  useLoginMutation,
+  useRefreshMutation,
+  useLogoutMutation,
+} = authApi;

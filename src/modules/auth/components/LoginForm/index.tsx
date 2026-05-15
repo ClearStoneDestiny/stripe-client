@@ -5,6 +5,7 @@ import {
   emailFormSchema,
   type EmailFormData,
 } from "@auth/components/LoginForm/schema";
+import { APP_ROUTES } from "@config/routes";
 import { useLoginMutation } from "@auth/api/authApi";
 import { Button } from "@components/ui/button";
 import {
@@ -20,6 +21,7 @@ import { Eye, EyeOff, Loader2, LogIn } from "lucide-react";
 import { enqueueSnackbar } from "notistack";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { useLocation, useNavigate } from "react-router";
 
 interface IApiErrorData {
   errors?: Array<{
@@ -30,6 +32,13 @@ interface IApiErrorData {
 
 interface IApiError {
   data?: IApiErrorData;
+}
+
+interface ILoginLocationState {
+  from?: {
+    pathname?: string;
+    search?: string;
+  };
 }
 
 const getLoginErrorMessage = (error: unknown, fallback: string) => {
@@ -46,6 +55,9 @@ const getLoginErrorMessage = (error: unknown, fallback: string) => {
 export const LoginForm = () => {
   const { t } = useTranslation("auth", { keyPrefix: "LoginForm" });
 
+  const location = useLocation();
+  const navigate = useNavigate();
+  const state = location.state as ILoginLocationState | null;
   const [login, { isLoading }] = useLoginMutation();
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
@@ -71,6 +83,10 @@ export const LoginForm = () => {
         variant: "success",
         preventDuplicate: true,
       });
+      navigate(
+        `${state?.from?.pathname ?? APP_ROUTES.HOME}${state?.from?.search ?? ""}`,
+        { replace: true },
+      );
     } catch (error) {
       setFormError(getLoginErrorMessage(error, t("error")));
     }

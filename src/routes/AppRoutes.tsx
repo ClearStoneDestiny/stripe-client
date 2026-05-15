@@ -1,8 +1,7 @@
-// import { ProtectedRoute, RedirectLoggedInUser } from "@auth/components";
-// import { MainLayout } from "@common/layouts";
-// import { HomePage, NotFoundPage } from "@common/pages";
+import { ProtectedRoute, RedirectLoggedInUser } from "@auth/components";
 import { LoginPage } from "@auth/pages";
-import { NotFoundPage } from "@common/pages";
+import { MainLayout } from "@common/layouts";
+import { HomePage, NotFoundPage } from "@common/pages";
 import { APP_ROUTES } from "@config/routes";
 import { Route, Routes } from "react-router";
 
@@ -13,27 +12,21 @@ export default function AppRoutes() {
       <Route
         path={APP_ROUTES.LOGIN}
         element={
-          // <RedirectLoggedInUser>
-          //</RedirectLoggedInUser>
-          <LoginPage />
+          <RedirectLoggedInUser>
+            <LoginPage />
+          </RedirectLoggedInUser>
         }
       />
 
       {/* Protected Routes + Main Layout */}
       <Route
-      // element={
-      //   <ProtectedRoute>
-      //     <ViewModeRouter />
-      //   </ProtectedRoute>
-      // }
+        element={
+          <ProtectedRoute>
+            <MainLayout />
+          </ProtectedRoute>
+        }
       >
-        <Route
-        // element={
-        //   <ProtectedRoute>
-        //     <MainLayout />
-        //   </ProtectedRoute>
-        // }
-        ></Route>
+        <Route path={APP_ROUTES.HOME} element={<HomePage />} />
       </Route>
 
       <Route path="*" element={<NotFoundPage />} />

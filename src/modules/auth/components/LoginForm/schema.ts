@@ -1,7 +1,6 @@
 import { getTranslation } from "@common/index";
 import * as v from "valibot";
 import { LoginByEmailFormFields } from "./fields";
-import config from "@config/index";
 
 const t = getTranslation("auth");
 
@@ -19,10 +18,10 @@ const emailFormSchema = v.object({
     v.nonEmpty(t("LoginForm.validation.passwordRequired")),
     v.minLength(8, t("LoginForm.validation.passwordMinLength")),
     v.maxLength(64, t("LoginForm.validation.passwordMaxLength")),
-    v.regex(
-      config.VALIDATION.PASSWORD_REGEX,
-      t("LoginForm.validation.passwordWeak"),
-    ),
+    // v.regex(
+    //   config.VALIDATION.PASSWORD_REGEX,
+    //   t("LoginForm.validation.passwordWeak"),
+    // ),
   ),
 });
 

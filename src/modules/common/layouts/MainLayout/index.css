@@ -1,0 +1,10 @@
+.layoutRoot {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.contentArea {
+  flex: 1;
+  padding: 24px;
+}
