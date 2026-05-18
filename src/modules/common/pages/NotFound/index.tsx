@@ -28,7 +28,7 @@ export const NotFoundPage = () => {
             {t("goBack")}
           </Button>
 
-          <Button onClick={() => navigate(APP_ROUTES.HOME)}>
+          <Button onClick={() => navigate(APP_ROUTES.LANDING)}>
             {t("goHome")}
           </Button>
         </div>
