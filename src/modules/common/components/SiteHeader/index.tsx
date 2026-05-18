@@ -5,17 +5,27 @@ import { Gamepad2 } from "lucide-react";
 import { Link } from "react-router";
 import { cn } from "src/lib/utils";
 import { useTranslation } from "react-i18next";
+import { useAuth } from "@auth/index";
 
-const navItems = [
+const publicNavItems = [
   { href: "#games", label: "Games" },
   { href: "#pricing", label: "Pricing" },
   { href: "#how-it-works", label: "How it works" },
 ];
 
+const protectedNavItems = [
+  { href: APP_ROUTES.HOME, label: "Home" },
+  { href: APP_ROUTES.CATALOG, label: "Catalog" },
+  { href: APP_ROUTES.BILLING, label: "Prices" },
+];
+
 export const SiteHeader = () => {
   const { t } = useTranslation("common", { keyPrefix: "SiteHeader" });
 
+  const { isAuthenticated } = useAuth();
+
   const [isFloating, setIsFloating] = useState(false);
+  const navItems = isAuthenticated ? protectedNavItems : publicNavItems;
 
   useEffect(() => {
     const handleScroll = () => {
