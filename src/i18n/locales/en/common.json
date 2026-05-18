@@ -1,8 +1,65 @@
 {
+  "LandingPage": {
+    "description": "Rent a high-end cloud rig by the hour, unlock unlimited sessions with a subscription, and keep the whole billing flow inside Stripe test mode.",
+    "eyebrow": "Cloud gaming billing lab",
+    "galleryDescription": "A small fictional catalog gives the product a real SaaS shape while the payments stay fully sandboxed.",
+    "galleryEyebrow": "Game library",
+    "galleryTitle": "Make the billing demo feel like a product people would actually browse.",
+    "primaryAction": "Start playing",
+    "pricingAction": "Open sandbox checkout",
+    "pricingEyebrow": "Stripe-ready pricing",
+    "pricingTitle": "Next stage: hourly credits, subscriptions, invoices, and a customer portal.",
+    "secondaryAction": "Browse games",
+    "stepsEyebrow": "How it works",
+    "stepsTitle": "Simple enough for a demo. Real enough for Stripe.",
+    "title": "Rent a cloud gaming rig in seconds.",
+
+    "games": [
+      {
+        "genre": "Tactical action",
+        "title": "Neon Warden"
+      },
+      {
+        "genre": "Open-world RPG",
+        "title": "Iron Vale"
+      },
+      {
+        "genre": "Zero-G racing",
+        "title": "Starfall Circuit"
+      },
+      {
+        "genre": "Survival sci-fi",
+        "title": "Deep Sector"
+      }
+    ],
+
+    "stats": [
+      "RTX-class sessions on demand",
+      "Hourly credits or subscriptions",
+      "Stripe sandbox billing flows"
+    ],
+
+    "steps": [
+      "Choose a game from the catalog.",
+      "Buy hours or activate a plan.",
+      "Launch a session from the dashboard."
+    ]
+  },
+
   "NotFoundPage": {
     "description": "Sorry, the page you visited does not exist.",
     "goBack": "Back previous page",
-    "goHome": "Back home",
+    "goHome": "Back to landing",
     "title": "Page not found"
+  },
+
+  "SiteHeader": {
+    "headerTitle": "Mika play",
+    "signIn": "Sign in",
+    "start": "Start"
+  },
+
+  "BentoGallery": {
+    "availableInGallery": "Available in sandbox"
   }
 }
