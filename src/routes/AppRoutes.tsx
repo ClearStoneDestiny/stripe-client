@@ -1,7 +1,7 @@
 import { ProtectedRoute, RedirectLoggedInUser } from "@auth/components";
 import { LoginPage } from "@auth/pages";
 import { MainLayout } from "@common/layouts";
-import { HomePage, NotFoundPage } from "@common/pages";
+import { HomePage, LandingPage, NotFoundPage } from "@common/pages";
 import { APP_ROUTES } from "@config/routes";
 import { Route, Routes } from "react-router";
 
@@ -9,6 +9,8 @@ export default function AppRoutes() {
   return (
     <Routes>
       {/* Public Routes */}
+      <Route path={APP_ROUTES.LANDING} element={<LandingPage />} />
+
       <Route
         path={APP_ROUTES.LOGIN}
         element={

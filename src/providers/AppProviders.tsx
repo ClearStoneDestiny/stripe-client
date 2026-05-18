@@ -8,6 +8,7 @@ import { I18nProvider } from "@providers/I18nProvider";
 import { ErrorFallback } from "@common/components";
 import { ErrorBoundary } from "react-error-boundary";
 import { createLogger } from "@utils/logger";
+import { AppThemeProvider } from "@providers/AppThemeProvider";
 
 interface IAppProvidersProps {
   children: ReactNode;
@@ -31,19 +32,22 @@ export const AppProviders = ({ children }: IAppProvidersProps) => {
     <ErrorBoundary FallbackComponent={ErrorFallback} onError={handleError}>
       {/* Redux */}
       <ReduxProvider store={store}>
-        {/* Locales */}
-        <I18nProvider>
-          {/* Router */}
-          <BrowserRouter>
-            {/* UI and notification */}
-            <SnackbarProvider
-              maxSnack={3}
-              anchorOrigin={{ vertical: "top", horizontal: "right" }}
-            >
-              {children}
-            </SnackbarProvider>
-          </BrowserRouter>
-        </I18nProvider>
+        {/* Theme */}
+        <AppThemeProvider>
+          {/* Locales */}
+          <I18nProvider>
+            {/* Router */}
+            <BrowserRouter>
+              {/* UI and notification */}
+              <SnackbarProvider
+                maxSnack={3}
+                anchorOrigin={{ vertical: "top", horizontal: "right" }}
+              >
+                {children}
+              </SnackbarProvider>
+            </BrowserRouter>
+          </I18nProvider>
+        </AppThemeProvider>
       </ReduxProvider>
     </ErrorBoundary>
   );
