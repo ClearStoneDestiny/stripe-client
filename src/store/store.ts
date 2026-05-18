@@ -7,8 +7,10 @@ const rootReducer = combineReducers({
   [apiSlice.reducerPath]: apiSlice.reducer,
 });
 
+type RootState = ReturnType<typeof rootReducer>;
+
 // Function to create store (use in a tests)
-export const setupStore = (preloadedState?: any) => {
+export const setupStore = (preloadedState?: Partial<RootState>) => {
   return configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>
