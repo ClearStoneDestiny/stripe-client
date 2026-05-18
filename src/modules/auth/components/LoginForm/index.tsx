@@ -165,23 +165,6 @@ export const LoginForm = () => {
             ) : null}
           </div>
 
-          <div className="flex flex-wrap items-center justify-between gap-3 text-sm">
-            <label className="flex items-center gap-2 text-muted-foreground">
-              <input
-                type="checkbox"
-                className="size-4 rounded-none border-input accent-foreground"
-                disabled={isLoading}
-              />
-              {t("fields.rememberMe")}
-            </label>
-            <a
-              className="font-medium text-foreground underline-offset-4 hover:underline"
-              href="mailto:support@example.com"
-            >
-              {t("actions.forgotPassword")}
-            </a>
-          </div>
-
           {formError ? (
             <div className="border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm leading-relaxed text-destructive">
               {formError}
