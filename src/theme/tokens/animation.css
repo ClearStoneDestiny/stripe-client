@@ -31,5 +31,6 @@
   --shadow-md:   0 4px 16px rgba(0, 0, 0, 0.5);
   --shadow-lg:   0 8px 32px rgba(0, 0, 0, 0.6);
   --shadow-frost: 0 4px 24px rgba(74, 143, 212, 0.2);
+  --shadow-frost-lg: 0 28px 90px rgba(74, 143, 212, 0.22);
   --shadow-coral: 0 4px 24px rgba(232, 89, 63, 0.35);
 }

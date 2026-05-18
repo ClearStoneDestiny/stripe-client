@@ -28,4 +28,10 @@
   --container-lg:  1024px;
   --container-xl:  1280px;
   --container-2xl: 1440px;
+
+  /* Layout */
+  --layout-page-x: clamp(var(--space-5), 4vw, var(--space-12));
+  --layout-section-y: clamp(var(--space-20), 8vw, var(--space-32));
+  --layout-content-max: var(--container-xl);
+  --layout-header-height: 4rem;
 }

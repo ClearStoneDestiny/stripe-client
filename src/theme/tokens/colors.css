@@ -53,4 +53,13 @@
   --color-border-default: rgba(255, 255, 255, 0.08);
   --color-border-accent: rgba(74, 143, 212, 0.3);
   --color-border-subtle: rgba(255, 255, 255, 0.04);
+
+  /* === UI surfaces === */
+  --color-glass-bg: rgba(10, 20, 36, 0.62);
+  --color-glass-bg-strong: rgba(10, 20, 36, 0.78);
+  --color-glass-border: rgba(235, 245, 253, 0.16);
+  --color-hero-muted: rgba(221, 228, 237, 0.78);
+  --color-hero-scrim: rgba(10, 10, 15, 0.52);
+  --color-hero-vignette: rgba(10, 10, 15, 0.86);
+  --color-frost-glow: rgba(122, 184, 232, 0.28);
 }

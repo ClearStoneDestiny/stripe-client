@@ -14,6 +14,8 @@
   --text-4xl: 2.25rem; /* 36px */
   --text-5xl: 3rem; /* 48px */
   --text-6xl: 3.75rem; /* 60px */
+  --text-hero: clamp(3.35rem, 8.4vw, 7.25rem);
+  --text-section: clamp(2.25rem, 4.8vw, 4.25rem);
 
   /* Font Weights */
   --weight-light: 300;
