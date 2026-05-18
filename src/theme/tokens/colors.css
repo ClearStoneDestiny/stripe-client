@@ -1,0 +1,56 @@
+:root {
+  /* === Graphite (main dark) === */
+  --color-graphite-950: #0a0a0f;
+  --color-graphite-900: #111118;
+  --color-graphite-800: #1a1a24;
+  --color-graphite-700: #24242f;
+  --color-graphite-600: #2e2e3d;
+  --color-graphite-500: #3d3d52;
+
+  /* === Frost Blue (accent cold) === */
+  --color-frost-900: #0d1f3c;
+  --color-frost-800: #0f2d5a;
+  --color-frost-700: #1a4080;
+  --color-frost-600: #2563b0;
+  --color-frost-500: #4a8fd4;
+  --color-frost-400: #7ab8e8;
+  --color-frost-300: #a8d4f5;
+  --color-frost-200: #d0eafb;
+  --color-frost-100: #ebf5fd;
+
+  /* === Cold White (phones, text) === */
+  --color-white-pure: #ffffff;
+  --color-white-cold: #f0f4f8;
+  --color-white-muted: #dde4ed;
+
+  /* === Coral (CTA / Stripe / Payment) === */
+  --color-coral-600: #c94f3a;
+  --color-coral-500: #e8593f;
+  --color-coral-400: #f07058;
+  --color-coral-300: #f59585;
+  --color-coral-200: #fac4bb;
+  --color-coral-glow: rgba(232, 89, 63, 0.35);
+
+  /* === Semantic tokens === */
+  --color-bg-base: var(--color-graphite-950);
+  --color-bg-surface: var(--color-graphite-900);
+  --color-bg-elevated: var(--color-graphite-800);
+  --color-bg-overlay: var(--color-graphite-700);
+
+  --color-text-primary: var(--color-white-cold);
+  --color-text-secondary: var(--color-white-muted);
+  --color-text-muted: var(--color-graphite-500);
+  --color-text-inverted: var(--color-graphite-950);
+
+  --color-accent-primary: var(--color-frost-500);
+  --color-accent-hover: var(--color-frost-400);
+  --color-accent-subtle: var(--color-frost-900);
+
+  --color-cta-primary: var(--color-coral-500);
+  --color-cta-hover: var(--color-coral-400);
+  --color-cta-glow: var(--color-coral-glow);
+
+  --color-border-default: rgba(255, 255, 255, 0.08);
+  --color-border-accent: rgba(74, 143, 212, 0.3);
+  --color-border-subtle: rgba(255, 255, 255, 0.04);
+}
