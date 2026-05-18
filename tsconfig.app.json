@@ -28,6 +28,9 @@
 
       "@auth/*": ["src/modules/auth/*"],
       "@common/*": ["src/modules/common/*"],
+      "@user/*": ["src/modules/user/*"],
+      "@product/*": ["src/modules/product/*"],
+      "@billing/*": ["src/modules/billing/*"],
       "@api/*": ["src/api/*"],
       "@components/*": ["src/components/*"],
       "@locales/*": ["src/locales/*"],

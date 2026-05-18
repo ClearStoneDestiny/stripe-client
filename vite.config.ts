@@ -14,6 +14,9 @@ export default defineConfig(() => {
 
         "@auth": path.resolve(__dirname, "src/modules/auth"),
         "@common": path.resolve(__dirname, "src/modules/common"),
+        "@user": path.resolve(__dirname, "src/modules/user"),
+        "@billing": path.resolve(__dirname, "src/modules/billing"),
+        "@product": path.resolve(__dirname, "src/modules/product"),
         "@components": path.resolve(__dirname, "src/components"),
         "@api": path.resolve(__dirname, "src/api"),
         "@locales": path.resolve(__dirname, "src/locales"),
