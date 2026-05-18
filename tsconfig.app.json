@@ -24,6 +24,8 @@
 
     "baseUrl": ".",
     "paths": {
+      "@/*": ["src/*"],
+
       "@auth/*": ["src/modules/auth/*"],
       "@common/*": ["src/modules/common/*"],
       "@api/*": ["src/api/*"],
