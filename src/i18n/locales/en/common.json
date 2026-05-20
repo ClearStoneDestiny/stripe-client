@@ -7,8 +7,9 @@
     "galleryTitle": "Make the billing demo feel like a product people would actually browse.",
     "primaryAction": "Start playing",
     "pricingAction": "Open sandbox checkout",
+    "pricingDescription": "Use this project as a realistic SaaS billing playground: model one-time play-hour packs, recurring subscriptions, invoices, customer portal access and authenticated account flows without charging real cards.",
     "pricingEyebrow": "Stripe-ready pricing",
-    "pricingTitle": "Next stage: hourly credits, subscriptions, invoices, and a customer portal.",
+    "pricingTitle": "A billing surface built to demonstrate Stripe inside a SaaS product.",
     "secondaryAction": "Browse games",
     "stepsEyebrow": "How it works",
     "stepsTitle": "Simple enough for a demo. Real enough for Stripe.",
@@ -43,6 +44,12 @@
       "Choose a game from the catalog.",
       "Buy hours or activate a plan.",
       "Launch a session from the dashboard."
+    ],
+
+    "pricingHighlights": [
+      "One-time checkout for hourly credits",
+      "Monthly plans for recurring access",
+      "Customer portal, invoices and test cards"
     ]
   },
 

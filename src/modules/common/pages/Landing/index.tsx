@@ -1,6 +1,7 @@
 import {
   BentoGallery,
   InteractiveHeroField,
+  Reveal,
   SiteHeader,
 } from "@common/components";
 import { Button } from "@components/ui/button";
@@ -13,12 +14,15 @@ export const LandingPage = () => {
   const { t } = useTranslation("common", { keyPrefix: "LandingPage" });
 
   const steps = t("steps", { returnObjects: true }) as string[];
+  const pricingHighlights = t("pricingHighlights", {
+    returnObjects: true,
+  }) as string[];
 
   return (
     <main className="min-h-dvh bg-surface-hero text-surface-hero-foreground">
       <SiteHeader />
 
-      <section className="relative isolate flex min-h-dvh items-center overflow-hidden px-[var(--page-x)] pt-[calc(var(--header-height)+var(--space-10))] pb-[var(--space-12)]">
+      <section className="relative isolate flex min-h-dvh items-center overflow-hidden px-[var(--page-x)] pt-[calc(var(--header-height)+var(--space-10))] pb-[var(--space-12)] ">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_22%,var(--brand-glow),transparent_32%),linear-gradient(145deg,var(--surface-hero)_0%,var(--color-bg-surface)_54%,var(--color-bg-base)_100%)]" />
         <InteractiveHeroField />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_48%,transparent_0%,rgba(10,10,15,0.18)_42%,var(--color-hero-vignette)_100%)]" />
@@ -27,15 +31,27 @@ export const LandingPage = () => {
 
         <div className="relative z-10 mx-auto flex w-full max-w-[var(--content-max)] items-center">
           <div className="max-w-5xl">
-            <h1 className="max-w-5xl text-[length:var(--text-hero)] leading-[1.2] font-semibold tracking-tight text-balance">
+            <Reveal
+              as="h1"
+              animation="animate__fadeInUp"
+              className="max-w-5xl text-[length:var(--text-hero)] leading-[1.2] font-semibold tracking-tight text-balance"
+            >
               {t("title")}
-            </h1>
+            </Reveal>
 
-            <p className="mt-[var(--space-6)] max-w-2xl text-base leading-8 text-surface-hero-muted sm:text-lg">
+            <Reveal
+              as="p"
+              animation="animate__fadeInUp"
+              className="mt-[var(--space-6)] max-w-2xl text-base leading-8 text-surface-hero-muted sm:text-lg"
+              delayMs={160}
+            >
               {t("description")}
-            </p>
+            </Reveal>
 
-            <div className="mt-[var(--space-8)] flex flex-col gap-[var(--space-3)] sm:flex-row">
+            <Reveal
+              className="mt-[var(--space-8)] flex flex-col gap-[var(--space-3)] sm:flex-row"
+              delayMs={280}
+            >
               <Button
                 asChild
                 className="bg-brand text-brand-foreground hover:bg-brand-soft"
@@ -48,13 +64,13 @@ export const LandingPage = () => {
               </Button>
               <Button
                 asChild
-                className="border-glass-border text-white hover:bg-white/10"
+                className="border-glass-border text-white hover:bg-white/70"
                 size="lg"
                 variant="outline"
               >
                 <a href="#games">{t("secondaryAction")}</a>
               </Button>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -65,20 +81,27 @@ export const LandingPage = () => {
       >
         <div className="mx-auto max-w-[var(--content-max)]">
           <div className="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end">
-            <div>
+            <Reveal animation="animate__fadeInLeft">
               <p className="text-xs font-semibold tracking-widest text-brand-soft uppercase">
                 {t("galleryEyebrow")}
               </p>
               <h2 className="mt-3 max-w-2xl text-[length:var(--text-section)] leading-tight font-semibold text-balance">
                 {t("galleryTitle")}
               </h2>
-            </div>
-            <p className="max-w-md text-sm leading-7 text-surface-hero-muted">
+            </Reveal>
+            <Reveal
+              as="p"
+              animation="animate__fadeInUp"
+              className="max-w-md text-sm leading-7 text-surface-hero-muted"
+              delayMs={140}
+            >
               {t("galleryDescription")}
-            </p>
+            </Reveal>
           </div>
 
-          <BentoGallery />
+          <Reveal animation="animate__fadeInUp" delayMs={220}>
+            <BentoGallery />
+          </Reveal>
         </div>
       </section>
 
@@ -87,23 +110,29 @@ export const LandingPage = () => {
         id="how-it-works"
       >
         <div className="mx-auto grid max-w-[var(--content-max)] gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
-          <div>
+          <Reveal animation="animate__fadeInUp">
             <p className="text-xs font-semibold tracking-widest text-brand-deep uppercase">
               {t("stepsEyebrow")}
             </p>
             <h2 className="mt-3 text-[length:var(--text-section)] leading-tight font-semibold text-balance">
               {t("stepsTitle")}
             </h2>
-          </div>
+          </Reveal>
 
           <div className="grid gap-3 md:grid-cols-3">
             {steps.map((step, index) => (
-              <article className="border border-border bg-white p-5" key={step}>
+              <Reveal
+                as="article"
+                animation="animate__fadeInUp"
+                className="border border-border bg-white p-5"
+                delayMs={index * 140}
+                key={step}
+              >
                 <span className="text-xs font-semibold tracking-widest text-brand-muted uppercase">
                   0{index + 1}
                 </span>
                 <p className="mt-6 text-lg leading-7 font-semibold">{step}</p>
-              </article>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -113,22 +142,45 @@ export const LandingPage = () => {
         className="bg-surface-hero px-[var(--page-x)] py-[var(--section-y)] text-white"
         id="pricing"
       >
-        <div className="mx-auto flex max-w-[var(--content-max)] flex-col items-start justify-between gap-8 border border-glass-border bg-white/6 p-6 sm:p-8 lg:flex-row lg:items-center">
-          <div>
+        <Reveal
+          animation="animate__fadeInUp"
+          className="mx-auto grid max-w-[var(--content-max)] gap-10 border border-glass-border bg-white/6 p-6 sm:p-8 lg:grid-cols-[minmax(0,1fr)_minmax(320px,0.48fr)] lg:items-center"
+        >
+          <div className="max-w-3xl">
             <p className="text-xs font-semibold tracking-widest text-brand-soft uppercase">
               {t("pricingEyebrow")}
             </p>
-            <h2 className="mt-3 max-w-3xl text-[length:var(--text-section)] leading-tight font-semibold text-balance">
+            <h2 className="mt-3 text-[length:var(--text-section)] leading-tight font-semibold text-balance">
               {t("pricingTitle")}
             </h2>
+            <p className="mt-5 max-w-2xl text-sm leading-7 text-surface-hero-muted sm:text-base">
+              {t("pricingDescription")}
+            </p>
           </div>
-          <Button
-            asChild
-            className="bg-surface-frost text-surface-frost-foreground hover:bg-brand-soft"
-          >
-            <Link to={APP_ROUTES.LOGIN}>{t("pricingAction")}</Link>
-          </Button>
-        </div>
+
+          <div className="grid gap-5">
+            <ul className="grid gap-3">
+              {pricingHighlights.map((highlight, index) => (
+                <li
+                  className="flex items-start gap-3 border border-glass-border bg-white/7 p-4 text-sm leading-6 text-surface-hero-muted"
+                  key={highlight}
+                >
+                  <span className="mt-1 text-xs font-semibold tracking-widest text-brand-soft">
+                    0{index + 1}
+                  </span>
+                  {highlight}
+                </li>
+              ))}
+            </ul>
+
+            <Button
+              asChild
+              className="bg-surface-frost text-surface-frost-foreground hover:bg-brand-soft"
+            >
+              <Link to={APP_ROUTES.LOGIN}>{t("pricingAction")}</Link>
+            </Button>
+          </div>
+        </Reveal>
       </section>
     </main>
   );

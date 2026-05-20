@@ -76,7 +76,7 @@ export const SiteHeader = () => {
         <div className="flex items-center gap-2">
           <Button
             asChild
-            className="hidden border-white/15 text-white hover:bg-white/10 md:inline-flex"
+            className="hidden border-white/15 text-white hover:bg-white/70 md:inline-flex"
             variant="outline"
           >
             <Link to={APP_ROUTES.LOGIN}>{t("signIn")}</Link>
