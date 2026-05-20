@@ -18,21 +18,10 @@ import {
 } from "@components/ui/card";
 import { Input } from "@components/ui/input";
 import { Eye, EyeOff, Loader2, LogIn } from "lucide-react";
-import { enqueueSnackbar } from "notistack";
+import { useSnackbar } from "notistack";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
-
-interface IApiErrorData {
-  errors?: Array<{
-    msg?: string;
-  }>;
-  message?: string;
-}
-
-interface IApiError {
-  data?: IApiErrorData;
-}
 
 interface ILoginLocationState {
   from?: {
@@ -41,24 +30,17 @@ interface ILoginLocationState {
   };
 }
 
-const getLoginErrorMessage = (error: unknown, fallback: string) => {
-  if (!error || typeof error !== "object") {
-    return fallback;
-  }
-
-  const apiError = error as IApiError;
-  const firstBackendError = apiError.data?.errors?.[0]?.msg;
-
-  return firstBackendError ?? apiError.data?.message ?? fallback;
-};
-
 export const LoginForm = () => {
   const { t } = useTranslation("auth", { keyPrefix: "LoginForm" });
+
+  const { enqueueSnackbar } = useSnackbar();
 
   const location = useLocation();
   const navigate = useNavigate();
   const state = location.state as ILoginLocationState | null;
+
   const [login, { isLoading }] = useLoginMutation();
+
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
 
@@ -88,22 +70,26 @@ export const LoginForm = () => {
         { replace: true },
       );
     } catch (error) {
-      setFormError(getLoginErrorMessage(error, t("error")));
+      enqueueSnackbar(t("loginFailed"), { variant: "error" });
     }
   };
 
   return (
-    <Card className="w-full max-w-[440px] border border-border/80 shadow-xl shadow-foreground/5">
+    <Card className="relative z-10 w-full max-w-[440px] border border-glass-border bg-white/8 text-white shadow-[var(--shadow-frost-lg)] backdrop-blur-2xl">
       <CardHeader>
-        <CardTitle>{t("title")}</CardTitle>
-        <CardDescription>{t("description")}</CardDescription>
+        <CardTitle className="text-2xl tracking-normal normal-case">
+          {t("title")}
+        </CardTitle>
+        <CardDescription className="text-surface-hero-muted">
+          {t("description")}
+        </CardDescription>
       </CardHeader>
 
       <CardContent>
         <form className="grid gap-5" onSubmit={handleSubmit(onSubmit)}>
           <div className="grid gap-2">
             <label
-              className="text-xs font-semibold tracking-widest text-foreground uppercase"
+              className="text-xs font-semibold tracking-widest text-brand-soft uppercase"
               htmlFor={LoginByEmailFormFields.EMAIL}
             >
               {t("fields.email.label")}
@@ -113,6 +99,7 @@ export const LoginForm = () => {
               type="email"
               autoComplete="email"
               placeholder={t("fields.email.placeholder")}
+              className="border-glass-border bg-white/8 text-white placeholder:text-white/38"
               aria-invalid={Boolean(errors.email)}
               disabled={isLoading}
               {...register(LoginByEmailFormFields.EMAIL)}
@@ -126,7 +113,7 @@ export const LoginForm = () => {
 
           <div className="grid gap-2">
             <label
-              className="text-xs font-semibold tracking-widest text-foreground uppercase"
+              className="text-xs font-semibold tracking-widest text-brand-soft uppercase"
               htmlFor={LoginByEmailFormFields.PASSWORD}
             >
               {t("fields.password.label")}
@@ -137,7 +124,7 @@ export const LoginForm = () => {
                 type={isPasswordVisible ? "text" : "password"}
                 autoComplete="current-password"
                 placeholder={t("fields.password.placeholder")}
-                className="pr-11"
+                className="border-glass-border bg-white/8 pr-11 text-white placeholder:text-white/38"
                 aria-invalid={Boolean(errors.password)}
                 disabled={isLoading}
                 {...register(LoginByEmailFormFields.PASSWORD)}
@@ -146,7 +133,7 @@ export const LoginForm = () => {
                 type="button"
                 variant="ghost"
                 size="icon-sm"
-                className="absolute top-1 right-1 h-9 w-9"
+                className="absolute top-1 right-1 h-9 w-9 text-surface-hero-muted hover:bg-white/10 hover:text-white"
                 aria-label={
                   isPasswordVisible
                     ? t("actions.hidePassword")
@@ -166,13 +153,13 @@ export const LoginForm = () => {
           </div>
 
           {formError ? (
-            <div className="border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm leading-relaxed text-destructive">
+            <div className="border border-destructive/40 bg-destructive/15 px-3 py-2 text-sm leading-relaxed text-destructive">
               {formError}
             </div>
           ) : null}
 
           <Button
-            className="w-full"
+            className="w-full bg-brand text-brand-foreground hover:bg-brand-soft"
             size="lg"
             type="submit"
             disabled={isLoading}
@@ -183,7 +170,7 @@ export const LoginForm = () => {
         </form>
       </CardContent>
 
-      <CardFooter className="border-t text-sm leading-relaxed text-muted-foreground">
+      <CardFooter className="border-t border-glass-border text-sm leading-relaxed text-surface-hero-muted">
         {t("footer")}
       </CardFooter>
     </Card>
