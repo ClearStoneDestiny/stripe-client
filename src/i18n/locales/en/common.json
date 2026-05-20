@@ -61,9 +61,56 @@
   },
 
   "SiteHeader": {
+    "billing": "Billing",
+    "catalog": "Catalog",
     "headerTitle": "Mika play",
     "signIn": "Sign in",
     "start": "Start"
+  },
+
+  "HomePage": {
+    "description": "This protected area turns the Stripe sandbox into a real product surface: sessions, credits, subscriptions and billing actions all live around the game catalog.",
+    "eyebrow": "Member dashboard",
+    "logout": "Log out",
+    "logoutLoading": "Logging out",
+    "overviewEyebrow": "Account overview",
+    "overviewTitle": "Everything a SaaS billing dashboard needs before real money enters the picture.",
+    "popularTitle": "Popular this week",
+    "sessionAction": "Explore catalog",
+    "sessionDescription": "Reserve a demo session, attach hourly credits, then send the checkout flow through Stripe test mode.",
+    "sessionEyebrow": "Next session",
+    "sessionTitle": "Your next launch is staged for a premium rig.",
+    "title": "Pick a rig, launch a game, keep the billing flow moving.",
+
+    "overviewCards": [
+      {
+        "description": "Mock hourly packs for one-time checkout experiments.",
+        "title": "Credits"
+      },
+      {
+        "description": "Recurring plans are ready for subscription wiring.",
+        "title": "Subscriptions"
+      },
+      {
+        "description": "Customer portal, invoices and payment methods belong here.",
+        "title": "Billing"
+      }
+    ],
+
+    "stats": [
+      {
+        "label": "Play credits",
+        "value": "12.5h"
+      },
+      {
+        "label": "Current plan",
+        "value": "Frost Pro"
+      },
+      {
+        "label": "Avg. queue",
+        "value": "28s"
+      }
+    ]
   },
 
   "BentoGallery": {
