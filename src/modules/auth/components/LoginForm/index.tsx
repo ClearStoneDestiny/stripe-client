@@ -69,8 +69,10 @@ export const LoginForm = () => {
         `${state?.from?.pathname ?? APP_ROUTES.HOME}${state?.from?.search ?? ""}`,
         { replace: true },
       );
-    } catch (error) {
-      enqueueSnackbar(t("loginFailed"), { variant: "error" });
+    } catch {
+      const message = t("loginFailed");
+      setFormError(message);
+      enqueueSnackbar(message, { variant: "error" });
     }
   };
 
