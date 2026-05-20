@@ -17,6 +17,7 @@
     "@stripe/react-stripe-js": "^6.3.0",
     "@stripe/stripe-js": "^9.5.0",
     "@tailwindcss/vite": "^4.3.0",
+    "animate.css": "^4.1.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "embla-carousel-react": "^8.6.0",
