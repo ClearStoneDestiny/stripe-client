@@ -64,7 +64,7 @@ export const LandingPage = () => {
               </Button>
               <Button
                 asChild
-                className="border-glass-border text-white hover:bg-white/70"
+                className="border-glass-border text-white hover:bg-white/10"
                 size="lg"
                 variant="outline"
               >
@@ -99,9 +99,7 @@ export const LandingPage = () => {
             </Reveal>
           </div>
 
-          <Reveal animation="animate__fadeInUp" delayMs={220}>
-            <BentoGallery />
-          </Reveal>
+          <BentoGallery />
         </div>
       </section>
 

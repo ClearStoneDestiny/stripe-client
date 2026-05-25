@@ -1,4 +1,4 @@
-import { ProductsCarousel } from "@/modules/product/components";
+import { ProductsCarousel } from "@product/components";
 import { apiSlice } from "@api/slices/apiSlice";
 import { useLogoutMutation } from "@auth/api/authApi";
 import { Button } from "@components/ui/button";
