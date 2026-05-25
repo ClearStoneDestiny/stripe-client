@@ -5,4 +5,8 @@ export const API_ENDPOINTS = {
     REFRESH: "/auth/token",
     LOGOUT: "/auth/logout",
   },
+
+  PRODUCTS: {
+    LIST: "/catalog/games",
+  },
 };

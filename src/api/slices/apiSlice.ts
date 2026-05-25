@@ -1,11 +1,11 @@
-import { baseQuery } from "@api/baseQuery";
+import { baseQueryWithRetry } from "@api/baseQueryWithRetry";
 import { createApi } from "@reduxjs/toolkit/query/react";
 
 export const apiSlice = createApi({
   reducerPath: "api", // Key in store
-  baseQuery: baseQuery,
+  baseQuery: baseQueryWithRetry,
   // Tags for cache invalidation (auto-update data)
-  tagTypes: ["User"],
+  tagTypes: ["User", "Product"],
   refetchOnMountOrArgChange: true,
   endpoints: () => ({}), // Endpoints will be added via injectEndpoints in modules
 });
