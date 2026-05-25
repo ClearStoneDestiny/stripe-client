@@ -1,4 +1,4 @@
-import { Reveal } from "@/modules/common/components";
+import { Reveal } from "@common/components";
 import { LoginForm } from "@auth/components";
 import { APP_ROUTES } from "@config/routes";
 import {
