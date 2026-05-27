@@ -68,7 +68,7 @@ export const productApi = apiSlice.injectEndpoints({
     }),
 
     // Get hour packs
-    getHourPacks: build.query<IHourPackEntity, { activeOnly?: boolean }>({
+    getHourPacks: build.query<IHourPackEntity[], { activeOnly?: boolean }>({
       query: (params) => ({
         url: API_ENDPOINTS.PRODUCTS.HOUR_PACKS,
         params,

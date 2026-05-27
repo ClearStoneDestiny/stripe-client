@@ -1,3 +1,4 @@
+import { BillingPage } from "@billing/pages";
 import { ProtectedRoute, RedirectLoggedInUser } from "@auth/components";
 import { LoginPage } from "@auth/pages";
 import { MainLayout } from "@common/layouts";
@@ -28,6 +29,7 @@ export default function AppRoutes() {
         }
       >
         <Route path={APP_ROUTES.HOME} element={<HomePage />} />
+        <Route path={APP_ROUTES.BILLING} element={<BillingPage />} />
       </Route>
 
       {/* Not Found */}

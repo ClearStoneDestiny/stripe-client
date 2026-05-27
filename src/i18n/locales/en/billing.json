@@ -1,0 +1,76 @@
+{
+  "BillingPage": {
+    "eyebrow": "Billing",
+    "title": "Choose Your Plan",
+    "description": "Select a subscription plan or purchase additional hours for your gaming needs.",
+
+    "tabs": {
+      "subscriptions": "Subscriptions",
+      "hourPacks": "Hour Packs"
+    }
+  },
+
+  "PaymentProviderSelector": {
+    "label": "Payment Method"
+  },
+
+  "SubscriptionsTab": {
+    "error": "Failed to load subscription plans. Please try again later.",
+    "empty": "No subscription plans available at the moment.",
+    "tieredTitle": "Standard Plans",
+    "surpriseTitle": "Surprise Collection"
+  },
+
+  "SubscriptionPlanCard": {
+    "gamesCount": "{{count}} games",
+    "gamesIncluded": "Games included:",
+    "andMore": "and {{count}} more...",
+    "selectPrice": "Select billing interval",
+    "currentPlan": "Current Plan",
+    "subscribe": "Subscribe",
+    "subscribing": "Subscribing...",
+
+    "interval": {
+      "month": "/month",
+      "year": "/year",
+      "day": "/day",
+      "week": "/week"
+    }
+  },
+
+  "HourPacksTab": {
+    "error": "Failed to load hour packs. Please try again later.",
+    "empty": "No hour packs available at the moment."
+  },
+
+  "HourPackCard": {
+    "hours": "{{count}} hours",
+    "buy": "Buy Now",
+    "purchasing": "Processing..."
+  },
+
+  "CurrentSubscriptionBanner": {
+    "title": "Your Active Subscription",
+    "plan": "Plan: {{name}}",
+    "status": "Status: {{status}}",
+    "period": "Valid until {{date}}",
+    "canceledNotice": "Your subscription will cancel at the end of the billing period.",
+
+    "statuses": {
+      "active": "Active",
+      "trialing": "Trial",
+      "past_due": "Past Due",
+      "canceled": "Canceled",
+      "paused": "Paused",
+      "incomplete": "Incomplete",
+      "incomplete_expired": "Expired",
+      "unpaid": "Unpaid"
+    }
+  },
+
+  "usePayment": {
+    "errors": {
+      "paymentFailed": "Payment failed. Please try again."
+    }
+  }
+}
