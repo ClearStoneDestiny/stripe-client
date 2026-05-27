@@ -6,3 +6,5 @@ export { PriceSelector } from "./PriceSelector";
 export { GamesListPreview } from "./GamesListPreview";
 export { HourPackCard } from "./HourPackCard";
 export { HourPacksTab } from "./HourPacksTab";
+export { CheckoutForm } from "./CheckoutForm";
+export { OrderSummary } from "./OrderSummary";

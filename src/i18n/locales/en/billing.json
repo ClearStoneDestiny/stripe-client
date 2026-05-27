@@ -72,5 +72,42 @@
     "errors": {
       "paymentFailed": "Payment failed. Please try again."
     }
+  },
+
+  "CheckoutPage": {
+    "title": "Complete Your Purchase",
+    "description": "Enter your payment details to complete the transaction."
+  },
+
+  "CheckoutForm": {
+    "paymentDetails": "Payment Details",
+    "submit": "Pay Now",
+    "processing": "Processing...",
+    "success": "Payment successful!",
+    "securePayment": "🔒 Secure payment powered by Stripe",
+
+    "errors": {
+      "paymentFailed": "Payment failed. Please try again.",
+      "unexpectedError": "An unexpected error occurred."
+    }
+  },
+
+  "OrderSummary": {
+    "title": "Order Summary",
+    "total": "Total",
+    "notFound": "Item not found"
+  },
+
+  "BillingSuccessPage": {
+    "title": "Payment Successful!",
+    "description": "Your payment has been processed. Your account will be updated within a few moments.",
+    "goToGames": "Browse Games",
+    "viewBilling": "View Billing"
+  },
+
+  "BillingCancelPage": {
+    "title": "Payment Canceled",
+    "description": "Your payment was canceled. No charges were made to your account.",
+    "tryAgain": "Try Again"
   }
 }

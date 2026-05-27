@@ -1,4 +1,9 @@
-import { BillingPage } from "@billing/pages";
+import {
+  BillingCancelPage,
+  BillingPage,
+  BillingSuccessPage,
+  CheckoutPage,
+} from "@billing/pages";
 import { ProtectedRoute, RedirectLoggedInUser } from "@auth/components";
 import { LoginPage } from "@auth/pages";
 import { MainLayout } from "@common/layouts";
@@ -30,6 +35,15 @@ export default function AppRoutes() {
       >
         <Route path={APP_ROUTES.HOME} element={<HomePage />} />
         <Route path={APP_ROUTES.BILLING} element={<BillingPage />} />
+        <Route path={APP_ROUTES.CHECKOUT} element={<CheckoutPage />} />
+        <Route
+          path={APP_ROUTES.BILLING_SUCCESS}
+          element={<BillingSuccessPage />}
+        />
+        <Route
+          path={APP_ROUTES.BILLING_CANCEL}
+          element={<BillingCancelPage />}
+        />
       </Route>
 
       {/* Not Found */}

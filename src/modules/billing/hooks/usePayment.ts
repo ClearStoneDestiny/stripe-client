@@ -3,9 +3,10 @@ import type { PaymentProviderEnum } from "@billing/enums/paymentProvider";
 import { useNavigate } from "react-router";
 import { useCreateBillingSessionMutation } from "@billing/api/billingApi";
 import { useState } from "react";
-import { APP_ROUTES } from "@/config/routes";
+import { APP_ROUTES } from "@config/routes";
 import type { PaymentModeEnum } from "@billing/enums/paymentMode";
 import { useTranslation } from "react-i18next";
+import { createLogger } from "@utils/logger";
 
 interface IUsePaymentSubscribeParams {
   provider: PaymentProviderEnum;
@@ -16,6 +17,8 @@ interface IUsePaymentPurchaseParams {
   provider: PaymentProviderEnum;
   hourPackId: number;
 }
+
+const logger = createLogger("modules/billing/hooks/usePayment");
 
 export const usePayment = () => {
   const { t } = useTranslation("billing", { keyPrefix: "usePayment" });
@@ -82,7 +85,7 @@ export const usePayment = () => {
         navigate(`${APP_ROUTES.CHECKOUT}?${queryParams.toString()}`);
       }
     } catch (error) {
-      console.error("Payment error:", error);
+      logger.error("Payment error:", { error });
       enqueueSnackbar(t("errors.paymentFailed"), { variant: "error" });
     } finally {
       setLoadingId(null);
