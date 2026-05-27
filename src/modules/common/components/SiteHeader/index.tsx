@@ -6,6 +6,8 @@ import { Link } from "react-router";
 import { cn } from "src/lib/utils";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "@auth/index";
+import { useShowHeader } from "@common/hooks/useShowHeader";
+import { UserProfileButton } from "@user/components";
 
 const publicNavItems = [
   { href: "#games", label: "Games" },
@@ -16,7 +18,7 @@ const publicNavItems = [
 const protectedNavItems = [
   { href: APP_ROUTES.HOME, label: "Home" },
   { href: `${APP_ROUTES.HOME}#popular`, label: "Catalog" },
-  { href: `${APP_ROUTES.HOME}#billing`, label: "Prices" },
+  { href: APP_ROUTES.BILLING, label: "Prices" },
 ];
 
 export const SiteHeader = () => {
@@ -26,6 +28,8 @@ export const SiteHeader = () => {
 
   const [isFloating, setIsFloating] = useState(false);
   const navItems = isAuthenticated ? protectedNavItems : publicNavItems;
+
+  const shouldShowHeader = useShowHeader();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,6 +41,10 @@ export const SiteHeader = () => {
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  if (!shouldShowHeader) {
+    return null;
+  }
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6">
@@ -73,36 +81,26 @@ export const SiteHeader = () => {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
-          <Button
-            asChild
-            className="hidden border-white/15 text-white hover:bg-white/70 md:inline-flex"
-            variant="outline"
-          >
-            <Link
-              to={
-                isAuthenticated
-                  ? `${APP_ROUTES.HOME}#popular`
-                  : APP_ROUTES.LOGIN
-              }
-            >
-              {isAuthenticated ? t("catalog") : t("signIn")}
-            </Link>
-          </Button>
-          <Button
-            asChild
-            className="bg-brand text-brand-foreground hover:bg-brand-soft"
-          >
-            <Link
-              to={
-                isAuthenticated
-                  ? `${APP_ROUTES.HOME}#billing`
-                  : APP_ROUTES.LOGIN
-              }
-            >
-              {isAuthenticated ? t("billing") : t("start")}
-            </Link>
-          </Button>
+        <div className="flex items-center gap-3">
+          {isAuthenticated ? (
+            <UserProfileButton />
+          ) : (
+            <>
+              <Button
+                asChild
+                className="hidden border-white/15 text-white hover:bg-white/70 md:inline-flex"
+                variant="outline"
+              >
+                <Link to={APP_ROUTES.LOGIN}>{t("signIn")}</Link>
+              </Button>
+              <Button
+                asChild
+                className="bg-brand text-brand-foreground hover:bg-brand-soft"
+              >
+                <Link to={APP_ROUTES.LOGIN}>{t("start")}</Link>
+              </Button>
+            </>
+          )}
         </div>
       </div>
     </header>

@@ -1,0 +1,127 @@
+{
+  "BillingPage": {
+    "eyebrow": "Stripe sandbox billing",
+    "title": "Choose the rig time that fits your play style",
+    "description": "A premium billing playground for testing subscriptions, one-time hour packs, checkout redirects, and payment element flows inside a SaaS-style gaming product.",
+    "backToHome": "Back to Games",
+
+    "checkoutCard": {
+      "title": "Checkout route",
+      "description": "Switch between Stripe flows without changing the offer cards.",
+      "note": "Sandbox mode, no real charges"
+    },
+
+    "tabs": {
+      "subscriptions": "Subscriptions",
+      "hourPacks": "Hour Packs"
+    }
+  },
+
+  "PaymentProviderSelector": {
+    "label": "Payment Method"
+  },
+
+  "SubscriptionsTab": {
+    "error": "Failed to load subscription plans. Please try again later.",
+    "empty": "No subscription plans available at the moment.",
+    "tieredEyebrow": "Membership",
+    "tieredTitle": "Streaming plans",
+    "tieredDescription": "Pick a library tier and keep access active while Stripe handles the subscription lifecycle.",
+    "surpriseEyebrow": "Rotating drop",
+    "surpriseTitle": "Surprise Collection",
+    "surpriseDescription": "The game set that is formed every month can contain games from any subscription. Give it a try!!!"
+  },
+
+  "SubscriptionPlanCard": {
+    "gamesCount": "{{count}} games",
+    "includesPreviousPlan": "includes {{name}} library",
+    "gamesIncluded": "Games included:",
+    "andMore": "and {{count}} more...",
+    "selectPrice": "Select billing interval",
+    "currentPlan": "Current Plan",
+    "active": "Activated",
+    "upgrade": "Upgrade",
+    "subscribe": "Subscribe",
+    "subscribing": "Subscribing...",
+
+    "interval": {
+      "month": "/month",
+      "year": "/year",
+      "day": "/day",
+      "week": "/week"
+    }
+  },
+
+  "HourPacksTab": {
+    "error": "Failed to load hour packs. Please try again later.",
+    "empty": "No hour packs available at the moment."
+  },
+
+  "HourPackCard": {
+    "hours": "hours",
+    "buy": "Buy Now",
+    "purchasing": "Processing..."
+  },
+
+  "CurrentSubscriptionBanner": {
+    "title": "Your Active Subscription",
+    "plan": "Plan: {{name}}",
+    "status": "Status: {{status}}",
+    "period": "Valid until {{date}}",
+    "canceledNotice": "Your subscription will cancel at the end of the billing period.",
+
+    "statuses": {
+      "active": "Active",
+      "trialing": "Trial",
+      "past_due": "Past Due",
+      "canceled": "Canceled",
+      "paused": "Paused",
+      "incomplete": "Incomplete",
+      "incomplete_expired": "Expired",
+      "unpaid": "Unpaid"
+    }
+  },
+
+  "usePayment": {
+    "errors": {
+      "paymentFailed": "Payment failed. Please try again."
+    }
+  },
+
+  "CheckoutPage": {
+    "title": "Complete Your Purchase",
+    "description": "Enter your payment details to complete the transaction."
+  },
+
+  "CheckoutForm": {
+    "paymentDetails": "Payment Details",
+    "submit": "Pay Now",
+    "processing": "Processing...",
+    "success": "Payment successful!",
+    "securePayment": "🔒 Secure payment powered by Stripe",
+
+    "errors": {
+      "paymentFailed": "Payment failed. Please try again.",
+      "unexpectedError": "An unexpected error occurred."
+    }
+  },
+
+  "OrderSummary": {
+    "title": "Order Summary",
+    "total": "Total",
+    "notFound": "Item not found"
+  },
+
+  "BillingSuccessPage": {
+    "title": "Payment Successful!",
+    "description": "Your payment has been processed. Your account will be updated within a few moments.",
+    "goToGames": "Browse Games",
+    "viewBilling": "View Billing"
+  },
+
+  "BillingCancelPage": {
+    "title": "Payment Canceled",
+    "description": "Your payment was canceled. No charges were made to your account.",
+    "tryAgain": "Try Again"
+  }
+}

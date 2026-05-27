@@ -2,9 +2,8 @@
   "LandingPage": {
     "description": "Rent a high-end cloud rig by the hour, unlock unlimited sessions with a subscription, and keep the whole billing flow inside Stripe test mode.",
     "eyebrow": "Cloud gaming billing lab",
-    "galleryDescription": "A small fictional catalog gives the product a real SaaS shape while the payments stay fully sandboxed.",
     "galleryEyebrow": "Game library",
-    "galleryTitle": "Make the billing demo feel like a product people would actually browse.",
+    "galleryTitle": "Play in top games even on week devices",
     "primaryAction": "Start playing",
     "pricingAction": "Open sandbox checkout",
     "pricingDescription": "Use this project as a realistic SaaS billing playground: model one-time play-hour packs, recurring subscriptions, invoices, customer portal access and authenticated account flows without charging real cards.",

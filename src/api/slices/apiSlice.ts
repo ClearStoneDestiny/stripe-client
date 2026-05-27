@@ -5,7 +5,16 @@ export const apiSlice = createApi({
   reducerPath: "api", // Key in store
   baseQuery: baseQueryWithRetry,
   // Tags for cache invalidation (auto-update data)
-  tagTypes: ["User", "Product"],
+  tagTypes: [
+    "User",
+    "Product",
+    "Subscription",
+    "SurpriseCollection",
+    "HourPack",
+    "Balance",
+    "SubscriptionPlan",
+    "Transaction",
+  ],
   refetchOnMountOrArgChange: true,
   endpoints: () => ({}), // Endpoints will be added via injectEndpoints in modules
 });

@@ -89,14 +89,6 @@ export const LandingPage = () => {
                 {t("galleryTitle")}
               </h2>
             </Reveal>
-            <Reveal
-              as="p"
-              animation="animate__fadeInUp"
-              className="max-w-md text-sm leading-7 text-surface-hero-muted"
-              delayMs={140}
-            >
-              {t("galleryDescription")}
-            </Reveal>
           </div>
 
           <BentoGallery />
