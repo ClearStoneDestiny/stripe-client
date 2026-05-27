@@ -8,5 +8,13 @@ export const API_ENDPOINTS = {
 
   PRODUCTS: {
     LIST: "/catalog/games",
+    SURPRISE_COLLECTION: "/catalog/surprise/current",
+    HOUR_PACKS: "/catalog/hour-packs",
+  },
+
+  BILLING: {
+    SESSION: "/billing/sessions",
+    BALANCE: "/game-time/balance",
+    TRANSACTIONS: "/game-time/transactions",
   },
 };
