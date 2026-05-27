@@ -5,6 +5,7 @@ import type { ICreateBillingSessionInput } from "@billing/interfaces/iCreateBill
 import type { IPaymentResultEntity } from "@billing/interfaces/iPaymentResultEntity";
 import type { IBalanceEntity } from "@billing/interfaces/iBalanceEntity";
 import type { ITransactionHistoryEntity } from "@billing/interfaces/iTransactionHistoryEntity";
+import type { ICurrentSubscriptionEntity } from "@billing/interfaces/iCurrentSubscriptionEntity";
 
 const logger = createLogger("modules/billing/api/billingApi");
 
@@ -48,6 +49,26 @@ export const billingApi = apiSlice.injectEndpoints({
       },
       extraOptions: { maxRetries: 2 },
       providesTags: (_result, _error) => [{ type: "HourPack" }],
+    }),
+
+    // Get current subscription
+    getCurrentSubscription: build.query<ICurrentSubscriptionEntity, void>({
+      query: () => ({
+        url: API_ENDPOINTS.BILLING.TRANSACTIONS,
+      }),
+      onQueryStarted: async (args, { queryFulfilled }) => {
+        try {
+          await queryFulfilled;
+          logger.info("received getCurrentSubscription");
+        } catch (e) {
+          const { error } = e as { error: any };
+          logger.error("failed to get getCurrentSubscription", {
+            context: { status: error?.status, args: JSON.stringify(args) },
+          });
+        }
+      },
+      extraOptions: { maxRetries: 2 },
+      providesTags: (_result, _error) => [{ type: "Billing" }],
     }),
 
     // Billing session mutation
