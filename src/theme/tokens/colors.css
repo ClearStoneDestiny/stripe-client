@@ -62,4 +62,10 @@
   --color-hero-scrim: rgba(10, 10, 15, 0.52);
   --color-hero-vignette: rgba(10, 10, 15, 0.86);
   --color-frost-glow: rgba(122, 184, 232, 0.28);
+
+  /* === Shadows === */
+  --shadow-frost-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-frost: 0 4px 16px rgba(0, 0, 0, 0.5);
+  --shadow-frost-lg: 0 8px 32px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 24px var(--color-frost-glow);
 }

@@ -7,6 +7,7 @@ import { cn } from "src/lib/utils";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "@auth/index";
 import { useShowHeader } from "@common/hooks/useShowHeader";
+import { UserProfileButton } from "@user/components";
 
 const publicNavItems = [
   { href: "#games", label: "Games" },
@@ -80,36 +81,26 @@ export const SiteHeader = () => {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
-          <Button
-            asChild
-            className="hidden border-white/15 text-white hover:bg-white/70 md:inline-flex"
-            variant="outline"
-          >
-            <Link
-              to={
-                isAuthenticated
-                  ? `${APP_ROUTES.HOME}#popular`
-                  : APP_ROUTES.LOGIN
-              }
-            >
-              {isAuthenticated ? t("catalog") : t("signIn")}
-            </Link>
-          </Button>
-          <Button
-            asChild
-            className="bg-brand text-brand-foreground hover:bg-brand-soft"
-          >
-            <Link
-              to={
-                isAuthenticated
-                  ? `${APP_ROUTES.HOME}#billing`
-                  : APP_ROUTES.LOGIN
-              }
-            >
-              {isAuthenticated ? t("billing") : t("start")}
-            </Link>
-          </Button>
+        <div className="flex items-center gap-3">
+          {isAuthenticated ? (
+            <UserProfileButton />
+          ) : (
+            <>
+              <Button
+                asChild
+                className="hidden border-white/15 text-white hover:bg-white/70 md:inline-flex"
+                variant="outline"
+              >
+                <Link to={APP_ROUTES.LOGIN}>{t("signIn")}</Link>
+              </Button>
+              <Button
+                asChild
+                className="bg-brand text-brand-foreground hover:bg-brand-soft"
+              >
+                <Link to={APP_ROUTES.LOGIN}>{t("start")}</Link>
+              </Button>
+            </>
+          )}
         </div>
       </div>
     </header>

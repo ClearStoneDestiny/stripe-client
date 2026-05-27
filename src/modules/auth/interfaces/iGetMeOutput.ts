@@ -1,3 +1,4 @@
-import type { IAuthUser } from "@auth/interfaces/iAuthUser";
-
-export type IGetMeOutput = IAuthUser | { user: IAuthUser };
+export type IGetMeOutput = {
+  email: string;
+  id: number;
+};

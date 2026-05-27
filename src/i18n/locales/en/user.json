@@ -1,0 +1,20 @@
+{
+  "UserProfileButton": {
+    "openProfile": "Open profile menu"
+  },
+
+  "UserProfileModal": {
+    "title": "My Profile",
+    "email": "Email",
+    "subscription": "Subscription",
+    "balance": "Available Hours",
+    "active": "Active",
+    "noSubscription": "No active subscription",
+    "noBalance": "No hours available",
+    "manageBilling": "Manage Billing",
+    "logout": "Log Out",
+    "loggingOut": "Logging out...",
+    "logoutSuccess": "Successfully logged out",
+    "logoutError": "Failed to log out. Please try again."
+  }
+}
