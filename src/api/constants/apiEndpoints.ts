@@ -9,6 +9,7 @@ export const API_ENDPOINTS = {
   PRODUCTS: {
     LIST: "/catalog/games",
     SURPRISE_COLLECTION: "/catalog/surprise/current",
+    SUBSCRIPTION_PLANS: "/catalog/subscription-plans",
     HOUR_PACKS: "/catalog/hour-packs",
   },
 

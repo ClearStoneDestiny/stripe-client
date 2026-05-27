@@ -5,6 +5,8 @@ import type { IPaginatedResponse, IPaginationParams } from "@common/index";
 import type { IGamesEntity } from "@product/interfaces/iGamesEntity";
 import type { ISurpriseCollectionEntity } from "@product/interfaces/iSurpriseCollectionEntity";
 import type { IHourPackEntity } from "@product/interfaces/iHourPackEntity";
+import type { IGetSubscriptionPlanInput } from "@product/interfaces/iGetSubscriptionPlanInput";
+import type { ISubscriptionPlanEntity } from "@product/interfaces/iSubscriptionPlanEntity";
 
 const logger = createLogger("modules/product/api/productApi");
 
@@ -85,6 +87,30 @@ export const productApi = apiSlice.injectEndpoints({
       extraOptions: { maxRetries: 2 },
       providesTags: (_result, _error) => [{ type: "HourPack" }],
     }),
+
+    // Get subscription plans
+    getSubscriptionPlans: build.query<
+      ISubscriptionPlanEntity[],
+      IGetSubscriptionPlanInput
+    >({
+      query: (params) => ({
+        url: API_ENDPOINTS.PRODUCTS.SUBSCRIPTION_PLANS,
+        params,
+      }),
+      onQueryStarted: async (args, { queryFulfilled }) => {
+        try {
+          await queryFulfilled;
+          logger.info("received getSubscriptionPlans");
+        } catch (e) {
+          const { error } = e as { error: any };
+          logger.error("failed to get getSubscriptionPlans", {
+            context: { status: error?.status, args: JSON.stringify(args) },
+          });
+        }
+      },
+      extraOptions: { maxRetries: 2 },
+      providesTags: (_result, _error) => [{ type: "SubscriptionPlan" }],
+    }),
   }),
 });
 
@@ -93,4 +119,5 @@ export const {
   useLazyGetProductsListQuery,
   useGetCurrentSurpriseCollectionQuery,
   useGetHourPacksQuery,
+  useGetSubscriptionPlansQuery,
 } = productApi;

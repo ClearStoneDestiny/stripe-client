@@ -12,6 +12,7 @@ export const apiSlice = createApi({
     "SurpriseCollection",
     "HourPack",
     "Balance",
+    "SubscriptionPlan",
   ],
   refetchOnMountOrArgChange: true,
   endpoints: () => ({}), // Endpoints will be added via injectEndpoints in modules
