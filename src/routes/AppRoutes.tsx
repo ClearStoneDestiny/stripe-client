@@ -10,7 +10,6 @@ export default function AppRoutes() {
     <Routes>
       {/* Public Routes */}
       <Route path={APP_ROUTES.LANDING} element={<LandingPage />} />
-
       <Route
         path={APP_ROUTES.LOGIN}
         element={
@@ -31,6 +30,7 @@ export default function AppRoutes() {
         <Route path={APP_ROUTES.HOME} element={<HomePage />} />
       </Route>
 
+      {/* Not Found */}
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
