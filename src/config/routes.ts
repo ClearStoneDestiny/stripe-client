@@ -9,3 +9,10 @@ export const APP_ROUTES = {
   PROFILE: "/profile",
   CATALOG: "/catalog",
 } as const;
+
+export const ROUTES_WITHOUT_HEADER = [
+  APP_ROUTES.BILLING,
+  APP_ROUTES.CHECKOUT,
+  APP_ROUTES.BILLING_SUCCESS,
+  APP_ROUTES.BILLING_CANCEL,
+] as const;

@@ -6,6 +6,7 @@ import { Link } from "react-router";
 import { cn } from "src/lib/utils";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "@auth/index";
+import { useShowHeader } from "@common/hooks/useShowHeader";
 
 const publicNavItems = [
   { href: "#games", label: "Games" },
@@ -27,6 +28,8 @@ export const SiteHeader = () => {
   const [isFloating, setIsFloating] = useState(false);
   const navItems = isAuthenticated ? protectedNavItems : publicNavItems;
 
+  const shouldShowHeader = useShowHeader();
+
   useEffect(() => {
     const handleScroll = () => {
       setIsFloating(window.scrollY > 72);
@@ -37,6 +40,10 @@ export const SiteHeader = () => {
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  if (!shouldShowHeader) {
+    return null;
+  }
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6">
