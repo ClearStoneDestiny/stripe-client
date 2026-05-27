@@ -5,3 +5,4 @@ export { LoadingButton } from "./LoadingButton";
 export { InteractiveHeroField } from "./InteractiveHeroField";
 export { Reveal } from "./Reveal";
 export { SiteHeader } from "./SiteHeader";
+export { BackButton } from "./BackButton";

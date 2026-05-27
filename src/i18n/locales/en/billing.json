@@ -3,6 +3,7 @@
     "eyebrow": "Billing",
     "title": "Choose Your Plan",
     "description": "Select a subscription plan or purchase additional hours for your gaming needs.",
+    "backToHome": "Back to Games",
 
     "tabs": {
       "subscriptions": "Subscriptions",

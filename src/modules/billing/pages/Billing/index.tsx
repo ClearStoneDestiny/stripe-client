@@ -12,6 +12,8 @@ import {
   HourPacksTab,
 } from "@billing/components";
 import { useTranslation } from "react-i18next";
+import { APP_ROUTES } from "@config/routes";
+import { BackButton } from "@common/components";
 
 export const BillingPage = () => {
   const { t } = useTranslation("billing", { keyPrefix: "BillingPage" });
@@ -25,6 +27,11 @@ export const BillingPage = () => {
   return (
     <main className="min-h-dvh bg-surface-frost px-[var(--page-x)] py-[var(--space-12)]">
       <div className="mx-auto max-w-[var(--content-max)]">
+        {/* Back Button */}
+        <div className="mb-6">
+          <BackButton to={APP_ROUTES.LANDING} label={t("backToHome")} />
+        </div>
+
         {/* Header */}
         <div className="mb-10">
           <p className="text-xs font-semibold tracking-widest text-brand-deep uppercase">
