@@ -50,7 +50,7 @@ export const HourPackCard = ({
         <p className="text-4xl font-bold text-brand">
           {pack.durationHours}
           <span className="ml-1 text-lg text-muted-foreground">
-            {t("hours", { count: pack.durationHours })}
+            {t("hours")}
           </span>
         </p>
         <p className="mt-1 text-xs text-muted-foreground">

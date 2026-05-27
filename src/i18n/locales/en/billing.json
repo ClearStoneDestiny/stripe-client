@@ -44,7 +44,7 @@
   },
 
   "HourPackCard": {
-    "hours": "{{count}} hours",
+    "hours": "hours",
     "buy": "Buy Now",
     "purchasing": "Processing..."
   },
