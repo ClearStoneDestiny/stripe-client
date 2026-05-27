@@ -74,7 +74,7 @@ function DialogContent({
           >
             <Button
               variant="ghost"
-              className="absolute top-5 right-5 bg-secondary"
+              className="absolute top-5 right-5 h-8 w-8 rounded-sm bg-transparent p-0 text-[var(--color-text-secondary)] opacity-70 transition-all hover:bg-[var(--color-bg-overlay)] hover:text-[var(--color-text-primary)] hover:opacity-100"
               size="icon-sm"
             >
               <XIcon className="h-4 w-4" />
