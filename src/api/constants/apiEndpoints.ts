@@ -14,8 +14,9 @@ export const API_ENDPOINTS = {
   },
 
   BILLING: {
-    SESSION: "/billing/sessions",
+    SESSION: "/stripe/billing/sessions",
     BALANCE: "/game-time/balance",
     TRANSACTIONS: "/game-time/transactions",
+    CURRENT_SUBSCRIPTION: '/stripe/billing/subscription/current'
   },
 };

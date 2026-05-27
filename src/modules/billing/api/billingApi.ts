@@ -54,7 +54,7 @@ export const billingApi = apiSlice.injectEndpoints({
     // Get current subscription
     getCurrentSubscription: build.query<ICurrentSubscriptionEntity, void>({
       query: () => ({
-        url: API_ENDPOINTS.BILLING.TRANSACTIONS,
+        url: API_ENDPOINTS.BILLING.CURRENT_SUBSCRIPTION,
       }),
       onQueryStarted: async (args, { queryFulfilled }) => {
         try {
@@ -68,7 +68,9 @@ export const billingApi = apiSlice.injectEndpoints({
         }
       },
       extraOptions: { maxRetries: 2 },
-      providesTags: (_result, _error) => [{ type: "Billing" }],
+      providesTags: (_result, _error) => [
+        { type: "Subscription", id: "CURRENT" },
+      ],
     }),
 
     // Billing session mutation
@@ -92,7 +94,11 @@ export const billingApi = apiSlice.injectEndpoints({
           });
         }
       },
-      invalidatesTags: ["Billing"],
+      invalidatesTags: [
+        { type: "Subscription", id: "CURRENT" },
+        { type: "Balance" },
+        { type: "Transaction" },
+      ],
     }),
   }),
 });
@@ -101,4 +107,5 @@ export const {
   useCreateBillingSessionMutation,
   useGetTransactionHistoryListQuery,
   useGetUserBalanceQuery,
+  useGetCurrentSubscriptionQuery,
 } = billingApi;

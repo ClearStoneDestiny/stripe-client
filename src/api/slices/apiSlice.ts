@@ -8,11 +8,12 @@ export const apiSlice = createApi({
   tagTypes: [
     "User",
     "Product",
-    "Billing",
+    "Subscription",
     "SurpriseCollection",
     "HourPack",
     "Balance",
     "SubscriptionPlan",
+    "Transaction",
   ],
   refetchOnMountOrArgChange: true,
   endpoints: () => ({}), // Endpoints will be added via injectEndpoints in modules
