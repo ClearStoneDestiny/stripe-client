@@ -27,17 +27,17 @@ export const PriceSelector = ({
 
   return (
     <div>
-      <label className="mb-2 block text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+      <label className="mb-2 block text-xs font-semibold tracking-widest text-surface-hero-muted uppercase">
         {t("selectPrice")}
       </label>
       <Select
         value={selectedPriceId?.toString()}
         onValueChange={(value) => onChange(Number(value))}
       >
-        <SelectTrigger>
+        <SelectTrigger className="h-11 w-full border border-glass-border bg-black/24 px-3 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.07)] hover:border-brand/45 hover:bg-black/34 focus-visible:border-brand [&_svg]:text-brand-soft">
           <SelectValue />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent className="border-glass-border bg-surface-hero text-white">
           {sortedPrices.map((price) => {
             const label =
               price.label ||

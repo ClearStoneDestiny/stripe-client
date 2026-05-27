@@ -22,14 +22,14 @@ export const HourPacksTab = ({ selectedProvider }: IHourPacksTabProps) => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <Loader2 className="h-8 w-8 animate-spin text-brand" />
+        <Loader2 className="h-8 w-8 animate-spin text-brand-soft" />
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="border border-destructive/40 bg-destructive/15 px-4 py-3 text-sm text-destructive">
+      <div className="border border-destructive/40 bg-destructive/15 px-4 py-3 text-sm text-red-100">
         {t("error")}
       </div>
     );
@@ -37,7 +37,7 @@ export const HourPacksTab = ({ selectedProvider }: IHourPacksTabProps) => {
 
   if (packs.length === 0) {
     return (
-      <div className="py-20 text-center text-muted-foreground">
+      <div className="py-20 text-center text-surface-hero-muted">
         {t("empty")}
       </div>
     );

@@ -29,46 +29,43 @@ export const HourPackCard = ({
   const currency = pack.stripePrice.currency.toUpperCase();
 
   return (
-    <article className="border border-border bg-white p-6 transition-shadow hover:shadow-lg">
-      {/* Header */}
+    <article className="group relative overflow-hidden border border-glass-border bg-[linear-gradient(180deg,rgba(255,255,255,0.1),rgba(255,255,255,0.04))] p-6 text-white backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-brand/45 hover:bg-white/12 hover:shadow-[0_28px_90px_rgba(0,0,0,0.36)]">
+      <div className="pointer-events-none absolute -top-24 right-0 size-48 rounded-full bg-brand/16 blur-3xl" />
       <div className="mb-4 flex items-start gap-3">
-        <div className="rounded-lg bg-brand/10 p-2">
-          <Clock className="h-6 w-6 text-brand" />
+        <div className="bg-brand/15 p-2 text-brand-soft">
+          <Clock className="h-6 w-6" />
         </div>
         <div>
           <h4 className="text-xl font-semibold">{pack.name}</h4>
           {pack.description && (
-            <p className="mt-1 text-sm text-muted-foreground">
+            <p className="mt-1 text-sm leading-6 text-surface-hero-muted">
               {pack.description}
             </p>
           )}
         </div>
       </div>
 
-      {/* Hours Display */}
       <div className="mb-6">
-        <p className="text-4xl font-bold text-brand">
+        <p className="text-4xl font-semibold text-brand-soft">
           {pack.durationHours}
-          <span className="ml-1 text-lg text-muted-foreground">
+          <span className="ml-1 text-lg text-surface-hero-muted">
             {t("hours")}
           </span>
         </p>
-        <p className="mt-1 text-xs text-muted-foreground">
+        <p className="mt-1 text-xs text-surface-hero-muted">
           ({pack.durationMinutes} minutes)
         </p>
       </div>
 
-      {/* Price */}
       <div className="mb-6">
-        <p className="text-3xl font-bold">
+        <p className="text-3xl font-semibold">
           {amount}{" "}
-          <span className="text-lg text-muted-foreground">{currency}</span>
+          <span className="text-lg text-surface-hero-muted">{currency}</span>
         </p>
       </div>
 
-      {/* Buy Button */}
       <Button
-        className="w-full"
+        className="w-full bg-white text-surface-frost-foreground hover:bg-brand-soft"
         size="lg"
         onClick={onPurchase}
         disabled={isLoading}

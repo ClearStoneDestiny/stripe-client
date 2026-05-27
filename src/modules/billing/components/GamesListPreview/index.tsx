@@ -3,17 +3,31 @@ import {
   useGetCurrentSurpriseCollectionQuery,
   useGetProductsListQuery,
 } from "@product/api/productApi";
-import type { SubscriptionPlanCodeEnum } from "@product/index";
-import { Loader2 } from "lucide-react";
+import {
+  resolveProductImageUrl,
+  type IGamesEntity,
+  type SubscriptionPlanCodeEnum,
+} from "@product/index";
+import { Gamepad2, Loader2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@components/ui/tooltip";
 
 interface IGamesListPreviewProps {
   planCode: SubscriptionPlanCodeEnum;
+  includedGamesCount: number;
+  previousGamesCount?: number;
   isSurprise?: boolean;
 }
 
 export const GamesListPreview = ({
   planCode,
+  includedGamesCount,
+  previousGamesCount = 0,
   isSurprise,
 }: IGamesListPreviewProps) => {
   const { t } = useTranslation("billing", {
@@ -26,10 +40,12 @@ export const GamesListPreview = ({
       skip: !isSurprise,
     });
 
-  // For tiered - take games according to the plan code
+  const previewSize = config.PAGINATION.PRODUCTS_PREVIEW_PAGE_SIZE;
+
+  // For tiered - load the plan library and display only games added after the previous tier.
   const { data: gamesData, isLoading: gamesLoading } = useGetProductsListQuery(
     {
-      limit: config.PAGINATION.PRODUCTS_PREVIEW_PAGE_SIZE,
+      limit: Math.max(includedGamesCount, previewSize),
       planCode: planCode,
     },
     {
@@ -48,18 +64,20 @@ export const GamesListPreview = ({
   }
 
   const games = isSurprise
-    ? surpriseData?.games.slice(
-        0,
-        config.PAGINATION.PRODUCTS_PREVIEW_PAGE_SIZE,
-      ) || []
-    : gamesData?.items || [];
+    ? surpriseData?.games.slice(0, previewSize) || []
+    : gamesData?.items.slice(
+        previousGamesCount,
+        previousGamesCount + previewSize,
+      ) || [];
 
   const totalCount = isSurprise
     ? surpriseData?.games.length || 0
-    : gamesData?.total || 0;
+    : Math.max(
+        (gamesData?.total || includedGamesCount) - previousGamesCount,
+        0,
+      );
 
-  const remainingCount =
-    totalCount - config.PAGINATION.PRODUCTS_PREVIEW_PAGE_SIZE;
+  const remainingCount = Math.max(totalCount - previewSize, 0);
 
   if (games.length === 0) {
     return null;
@@ -67,21 +85,73 @@ export const GamesListPreview = ({
 
   return (
     <div className="mb-6">
-      <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+      <p className="mb-3 text-xs font-semibold tracking-widest text-surface-hero-muted uppercase">
         {t("gamesIncluded")}
       </p>
-      <ul className="space-y-1 text-sm text-muted-foreground">
-        {games.map((game) => (
-          <li key={game.id} className="truncate">
-            • {game.title}
-          </li>
+
+      <TooltipProvider>
+        <div className="flex items-center gap-2">
+          {games.slice(0, 3).map((game, index) => (
+            <GameAvatar game={game} index={index} key={game.id} />
+          ))}
+
+          {remainingCount > 0 && (
+            <span className="grid size-14 place-items-center rounded-md border border-glass-border bg-white text-xs font-semibold text-surface-frost-foreground shadow-[0_10px_24px_rgba(0,0,0,0.28)]">
+              +{remainingCount}
+            </span>
+          )}
+        </div>
+      </TooltipProvider>
+
+      <div className="mt-4 flex flex-wrap gap-x-2 gap-y-1 text-sm leading-6 text-surface-hero-muted">
+        {games.slice(0, 3).map((game, index) => (
+          <span className="max-w-full truncate" key={game.id}>
+            {game.title}
+            {index < games.slice(0, 3).length - 1 || remainingCount > 0
+              ? ","
+              : ""}
+          </span>
         ))}
         {remainingCount > 0 && (
-          <li className="font-medium text-foreground">
+          <span className="font-medium text-brand-soft">
             {t("andMore", { count: remainingCount })}
-          </li>
+          </span>
         )}
-      </ul>
+      </div>
     </div>
+  );
+};
+
+interface IGameAvatarProps {
+  game: IGamesEntity;
+  index: number;
+}
+
+const GameAvatar = ({ game, index }: IGameAvatarProps) => {
+  const imageUrl = resolveProductImageUrl(game.coverImageUrl);
+
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <span
+          className="relative grid size-14 place-items-center overflow-hidden rounded-md border border-glass-border bg-surface-hero text-brand-soft shadow-[0_10px_24px_rgba(0,0,0,0.28)]"
+          style={{ zIndex: 10 - index }}
+        >
+          {imageUrl ? (
+            <img
+              src={imageUrl}
+              alt={game.title}
+              className="h-full w-full object-cover"
+              loading="lazy"
+            />
+          ) : (
+            <Gamepad2 className="size-5" />
+          )}
+        </span>
+      </TooltipTrigger>
+      <TooltipContent sideOffset={8}>
+        <span>{game.title}</span>
+      </TooltipContent>
+    </Tooltip>
   );
 };

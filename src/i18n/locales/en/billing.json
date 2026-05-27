@@ -1,9 +1,15 @@
 {
   "BillingPage": {
-    "eyebrow": "Billing",
-    "title": "Choose Your Plan",
-    "description": "Select a subscription plan or purchase additional hours for your gaming needs.",
+    "eyebrow": "Stripe sandbox billing",
+    "title": "Choose the rig time that fits your play style",
+    "description": "A premium billing playground for testing subscriptions, one-time hour packs, checkout redirects, and payment element flows inside a SaaS-style gaming product.",
     "backToHome": "Back to Games",
+
+    "checkoutCard": {
+      "title": "Checkout route",
+      "description": "Switch between Stripe flows without changing the offer cards.",
+      "note": "Sandbox mode, no real charges"
+    },
 
     "tabs": {
       "subscriptions": "Subscriptions",
@@ -18,16 +24,23 @@
   "SubscriptionsTab": {
     "error": "Failed to load subscription plans. Please try again later.",
     "empty": "No subscription plans available at the moment.",
-    "tieredTitle": "Standard Plans",
-    "surpriseTitle": "Surprise Collection"
+    "tieredEyebrow": "Membership",
+    "tieredTitle": "Streaming plans",
+    "tieredDescription": "Pick a library tier and keep access active while Stripe handles the subscription lifecycle.",
+    "surpriseEyebrow": "Rotating drop",
+    "surpriseTitle": "Surprise Collection",
+    "surpriseDescription": "The game set that is formed every month can contain games from any subscription. Give it a try!!!"
   },
 
   "SubscriptionPlanCard": {
     "gamesCount": "{{count}} games",
+    "includesPreviousPlan": "includes {{name}} library",
     "gamesIncluded": "Games included:",
     "andMore": "and {{count}} more...",
     "selectPrice": "Select billing interval",
     "currentPlan": "Current Plan",
+    "active": "Activated",
+    "upgrade": "Upgrade",
     "subscribe": "Subscribe",
     "subscribing": "Subscribing...",
 
