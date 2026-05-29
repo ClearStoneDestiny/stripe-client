@@ -29,7 +29,10 @@
     "tieredDescription": "Pick a library tier and keep access active while Stripe handles the subscription lifecycle.",
     "surpriseEyebrow": "Rotating drop",
     "surpriseTitle": "Surprise Collection",
-    "surpriseDescription": "The game set that is formed every month can contain games from any subscription. Give it a try!!!"
+    "surpriseDescription": "The game set that is formed every month can contain games from any subscription. Give it a try!!!",
+    "confirmCancel": "Are you sure that you want to cancel subscription?",
+    "cancelSuccess": "Subscription was canceled successful",
+    "cancelError": "Subscription was not canceled, try again"
   },
 
   "SubscriptionPlanCard": {
@@ -43,6 +46,8 @@
     "upgrade": "Upgrade",
     "subscribe": "Subscribe",
     "subscribing": "Subscribing...",
+    "canceling": "Canceling...",
+    "cancelSubscription": "Cancel subscription",
 
     "interval": {
       "month": "/month",

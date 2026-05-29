@@ -6,6 +6,7 @@ import type { IPaymentResultEntity } from "@billing/interfaces/iPaymentResultEnt
 import type { IBalanceEntity } from "@billing/interfaces/iBalanceEntity";
 import type { ITransactionHistoryEntity } from "@billing/interfaces/iTransactionHistoryEntity";
 import type { ICurrentSubscriptionEntity } from "@billing/interfaces/iCurrentSubscriptionEntity";
+import type { ICancelSubscriptionOutput } from "@billing/interfaces/iCancelSubscriptionOutput";
 
 const logger = createLogger("modules/billing/api/billingApi");
 
@@ -54,7 +55,7 @@ export const billingApi = apiSlice.injectEndpoints({
     // Get current subscription
     getCurrentSubscription: build.query<ICurrentSubscriptionEntity, void>({
       query: () => ({
-        url: API_ENDPOINTS.BILLING.CURRENT_SUBSCRIPTION,
+        url: API_ENDPOINTS.BILLING.SUBSCRIPTION.CURRENT,
       }),
       onQueryStarted: async (args, { queryFulfilled }) => {
         try {
@@ -100,6 +101,34 @@ export const billingApi = apiSlice.injectEndpoints({
         { type: "Transaction" },
       ],
     }),
+
+    // Cancel subscription mutation
+    cancelSubscription: build.mutation<
+      ICancelSubscriptionOutput,
+      { immediately?: boolean }
+    >({
+      query: (body) => ({
+        url: API_ENDPOINTS.BILLING.SUBSCRIPTION.CANCEL,
+        method: "DELETE",
+        body,
+      }),
+      onQueryStarted: async (args, { queryFulfilled }) => {
+        try {
+          await queryFulfilled;
+          logger.info("received cancelSubscription");
+        } catch (e) {
+          const { error } = e as { error: any };
+          logger.error("failed to get cancelSubscription", {
+            context: { status: error?.status, args: JSON.stringify(args) },
+          });
+        }
+      },
+      invalidatesTags: [
+        { type: "Subscription", id: "CURRENT" },
+        { type: "Balance" },
+        { type: "Transaction" },
+      ],
+    }),
   }),
 });
 
@@ -108,4 +137,5 @@ export const {
   useGetTransactionHistoryListQuery,
   useGetUserBalanceQuery,
   useGetCurrentSubscriptionQuery,
+  useCancelSubscriptionMutation,
 } = billingApi;

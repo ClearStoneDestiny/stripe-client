@@ -17,6 +17,9 @@ interface ISubscriptionPlanCardProps {
   hasActiveSubscription?: boolean;
   previousGamesCount?: number;
   previousPlanName?: string;
+  onCancelSubscription?: () => void;
+  isCanceling?: boolean;
+  isCancelAtPeriodEnd?: boolean;
 }
 
 export const SubscriptionPlanCard = ({
@@ -27,6 +30,9 @@ export const SubscriptionPlanCard = ({
   hasActiveSubscription = false,
   previousGamesCount = 0,
   previousPlanName,
+  onCancelSubscription,
+  isCanceling,
+  isCancelAtPeriodEnd,
 }: ISubscriptionPlanCardProps) => {
   const { t } = useTranslation("billing", {
     keyPrefix: "SubscriptionPlanCard",
@@ -45,7 +51,10 @@ export const SubscriptionPlanCard = ({
       : t("subscribe");
 
   const onSubscribe = () => {
-    if (!selectedPriceId || isActive) return;
+    if (!selectedPriceId || isActive) {
+      return;
+    }
+
     handleSubscribe({
       provider: selectedProvider,
       subscriptionPlanPriceId: selectedPriceId,
@@ -156,6 +165,19 @@ export const SubscriptionPlanCard = ({
           buttonLabel
         )}
       </Button>
+
+      {isActive && !isCancelAtPeriodEnd && (
+        <div className="flex justify-center mt-4">
+          <button
+            type="button"
+            onClick={onCancelSubscription}
+            disabled={isCanceling}
+            className="text-sm text-surface-hero-muted transition hover:text-red-400 disabled:opacity-50"
+          >
+            {isCanceling ? t("canceling") : t("cancelSubscription")}
+          </button>
+        </div>
+      )}
     </article>
   );
 };

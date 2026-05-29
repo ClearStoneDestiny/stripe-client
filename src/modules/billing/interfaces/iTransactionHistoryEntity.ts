@@ -6,5 +6,5 @@ export interface ITransactionHistoryEntity {
   minutes: number;
   hours: number;
   reason?: string;
-  createdAt: Date;
+  createdAt: string;
 }

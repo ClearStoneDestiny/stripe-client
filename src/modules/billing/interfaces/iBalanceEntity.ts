@@ -6,5 +6,5 @@ export interface IBalanceEntity {
   totalMinutes: number;
   totalHours: number;
   currentMonth: string;
-  nextResetAt: Date;
+  nextResetAt: string;
 }

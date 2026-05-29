@@ -3,8 +3,13 @@ import type { PaymentProviderEnum } from "@billing/enums/paymentProvider";
 import { Loader2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { SubscriptionPlanCard } from "../SubscriptionPlanCard";
-import { useGetCurrentSubscriptionQuery } from "@billing/api/billingApi";
+import {
+  useCancelSubscriptionMutation,
+  useGetCurrentSubscriptionQuery,
+} from "@billing/api/billingApi";
 import type { StripeSubscriptionStatusEnum } from "@billing/enums/stripeSubscriptionStatus";
+import { useSnackbar } from "notistack";
+import { format } from "date-fns";
 
 interface SubscriptionsTabProps {
   selectedProvider: PaymentProviderEnum;
@@ -15,6 +20,8 @@ export const SubscriptionsTab = ({
 }: SubscriptionsTabProps) => {
   const { t } = useTranslation("billing", { keyPrefix: "SubscriptionsTab" });
 
+  const { enqueueSnackbar } = useSnackbar();
+
   const {
     data: plans,
     isLoading,
@@ -23,17 +30,49 @@ export const SubscriptionsTab = ({
     activeOnly: true,
   });
 
-  const { data: currentSubscriptionData } = useGetCurrentSubscriptionQuery();
+  const { data: currentSubscriptionData, refetch: refetchSubscription } =
+    useGetCurrentSubscriptionQuery();
+
+  const [cancelSubscription, { isLoading: isCanceling }] =
+    useCancelSubscriptionMutation();
 
   const currentSubscription = currentSubscriptionData?.subscription;
-  const activeStatuses: StripeSubscriptionStatusEnum[] = [
-    "active",
-    "trialing",
-  ];
-  const activePlanCode =
-    currentSubscription && activeStatuses.includes(currentSubscription.status)
-      ? currentSubscription.plan?.code
-      : undefined;
+  const activeStatuses: StripeSubscriptionStatusEnum[] = ["active", "trialing"];
+  const isSubscriptionActive =
+    currentSubscription && activeStatuses.includes(currentSubscription.status);
+  const activePlanCode = isSubscriptionActive
+    ? currentSubscription.plan?.code
+    : undefined;
+
+  const handleCancelSubscription = async () => {
+    if (!currentSubscription?.currentPeriodEnd) {
+      return;
+    }
+
+    const confirmed = window.confirm(
+      t("confirmCancel", {
+        date: format(new Date(currentSubscription.currentPeriodEnd), "PPP"),
+      }),
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
+    try {
+      await cancelSubscription({ immediately: false }).unwrap();
+
+      enqueueSnackbar(t("cancelSuccess"), {
+        variant: "success",
+      });
+
+      await refetchSubscription();
+    } catch {
+      enqueueSnackbar(t("cancelError"), {
+        variant: "error",
+      });
+    }
+  };
 
   if (isLoading) {
     return (
@@ -96,6 +135,9 @@ export const SubscriptionsTab = ({
                   hasActiveSubscription={Boolean(activePlanCode)}
                   previousGamesCount={previousPlan?.includedGamesCount || 0}
                   previousPlanName={previousPlan?.name}
+                  onCancelSubscription={handleCancelSubscription}
+                  isCanceling={isCanceling}
+                  isCancelAtPeriodEnd={currentSubscription?.cancelAtPeriodEnd}
                 />
               );
             })}

@@ -5,11 +5,11 @@ import type { ICurrentSubscriptionPriceEntity } from "./iCurrentSubscriptionPric
 export interface ICurrentSubscriptionItemEntity {
   id: number;
   status: StripeSubscriptionStatusEnum;
-  currentPeriodStart?: Date;
-  currentPeriodEnd?: Date;
+  currentPeriodStart?: string;
+  currentPeriodEnd?: string;
   cancelAtPeriodEnd: boolean;
-  canceledAt?: Date;
-  trialEnd?: Date;
+  canceledAt?: string;
+  trialEnd?: string;
   plan?: ICurrentSubscriptionPlanEntity;
   price?: ICurrentSubscriptionPriceEntity;
 }
