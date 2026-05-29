@@ -48,6 +48,7 @@
     "subscribing": "Subscribing...",
     "canceling": "Canceling...",
     "cancelSubscription": "Cancel subscription",
+    "subscriptionEndsAt": "Subscription ends at: {{date}}",
 
     "interval": {
       "month": "/month",

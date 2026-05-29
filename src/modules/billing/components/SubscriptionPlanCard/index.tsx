@@ -8,6 +8,7 @@ import { GamesListPreview } from "../GamesListPreview";
 import { useTranslation } from "react-i18next";
 import { usePayment } from "@billing/hooks/usePayment";
 import { cn } from "@/lib/utils";
+import { format } from "date-fns";
 
 interface ISubscriptionPlanCardProps {
   plan: ISubscriptionPlanEntity;
@@ -20,6 +21,7 @@ interface ISubscriptionPlanCardProps {
   onCancelSubscription?: () => void;
   isCanceling?: boolean;
   isCancelAtPeriodEnd?: boolean;
+  currentPeriodEnd?: string;
 }
 
 export const SubscriptionPlanCard = ({
@@ -33,6 +35,7 @@ export const SubscriptionPlanCard = ({
   onCancelSubscription,
   isCanceling,
   isCancelAtPeriodEnd,
+  currentPeriodEnd,
 }: ISubscriptionPlanCardProps) => {
   const { t } = useTranslation("billing", {
     keyPrefix: "SubscriptionPlanCard",
@@ -60,6 +63,11 @@ export const SubscriptionPlanCard = ({
       subscriptionPlanPriceId: selectedPriceId,
     });
   };
+
+  const formattedCurrentPeriodEnd =
+    isActive && currentPeriodEnd
+      ? format(new Date(currentPeriodEnd), "PPP")
+      : "";
 
   return (
     <article
@@ -165,6 +173,14 @@ export const SubscriptionPlanCard = ({
           buttonLabel
         )}
       </Button>
+
+      {isActive && isCancelAtPeriodEnd && (
+        <div className="text-center text-sm text-yellow-400 mt-4">
+          {t("subscriptionEndsAt", {
+            date: formattedCurrentPeriodEnd,
+          })}
+        </div>
+      )}
 
       {isActive && !isCancelAtPeriodEnd && (
         <div className="flex justify-center mt-4">

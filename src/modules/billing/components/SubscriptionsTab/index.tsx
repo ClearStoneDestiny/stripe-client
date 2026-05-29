@@ -138,6 +138,7 @@ export const SubscriptionsTab = ({
                   onCancelSubscription={handleCancelSubscription}
                   isCanceling={isCanceling}
                   isCancelAtPeriodEnd={currentSubscription?.cancelAtPeriodEnd}
+                  currentPeriodEnd={currentSubscription?.currentPeriodEnd}
                 />
               );
             })}
