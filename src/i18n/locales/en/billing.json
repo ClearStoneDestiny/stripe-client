@@ -49,6 +49,10 @@
     "canceling": "Canceling...",
     "cancelSubscription": "Cancel subscription",
     "subscriptionEndsAt": "Subscription ends at: {{date}}",
+    "cancelDialogTitle": "Cancel subscription?",
+    "cancelDialogDescription": "The subscription will remain active until {{date}}, after which renewal will be disabled.",
+    "cancelDialogCancel": "Back",
+    "cancelDialogConfirm": "Cancel subscription",
 
     "interval": {
       "month": "/month",
