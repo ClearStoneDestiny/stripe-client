@@ -1,0 +1,36 @@
+{
+  "GameCard": {
+    "includedWith": "Included in"
+  },
+
+  "GameGrid": {
+    "notFound": "No games found",
+    "adjustFilters": "Try adjusting your filters"
+  },
+
+  "CatalogPage": {
+    "backToHome": "Back to Home",
+    "eyebrow": "Game Library",
+    "title": "Browse All Games",
+    "description": "Explore our full collection of games available across all subscription plans. Find your next favorite title and start playing instantly.",
+    "searchPlaceholder": "Search games...",
+    "gamesFound": "{{count}} games found",
+    "includedIn": "Included in:",
+    "fallbackDescription": "This catalog item is ready for the demo library. More screenshots, gameplay details and launch metadata can be added when the product content grows.",
+    "viewPlans": "View plans",
+    "closeDetails": "Close",
+
+    "details": {
+      "slug": "Catalog id",
+      "access": "Access tier"
+    },
+
+    "filters": {
+      "label": "Plan filter",
+      "allPlans": "All Plans",
+      "start": "Start",
+      "medium": "Medium",
+      "pro": "Pro"
+    }
+  }
+}

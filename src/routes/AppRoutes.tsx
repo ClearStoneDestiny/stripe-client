@@ -10,6 +10,7 @@ import { MainLayout } from "@common/layouts";
 import { HomePage, LandingPage, NotFoundPage } from "@common/pages";
 import { APP_ROUTES } from "@config/routes";
 import { Route, Routes } from "react-router";
+import { CatalogPage } from "@product/pages";
 
 export default function AppRoutes() {
   return (
@@ -44,6 +45,7 @@ export default function AppRoutes() {
           path={APP_ROUTES.BILLING_CANCEL}
           element={<BillingCancelPage />}
         />
+        <Route path={APP_ROUTES.CATALOG} element={<CatalogPage />} />
       </Route>
 
       {/* Not Found */}

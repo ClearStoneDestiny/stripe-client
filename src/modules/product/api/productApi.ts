@@ -7,6 +7,7 @@ import type { ISurpriseCollectionEntity } from "@product/interfaces/iSurpriseCol
 import type { IHourPackEntity } from "@product/interfaces/iHourPackEntity";
 import type { IGetSubscriptionPlanInput } from "@product/interfaces/iGetSubscriptionPlanInput";
 import type { ISubscriptionPlanEntity } from "@product/interfaces/iSubscriptionPlanEntity";
+import type { IGamesExtendedEntity } from "@product/interfaces/iGamesExtendedEntity";
 
 const logger = createLogger("modules/product/api/productApi");
 
@@ -14,7 +15,7 @@ export const productApi = apiSlice.injectEndpoints({
   endpoints: (build) => ({
     // Get products list
     getProductsList: build.query<
-      IPaginatedResponse<IGamesEntity>,
+      IPaginatedResponse<IGamesEntity | IGamesExtendedEntity>,
       IPaginationParams
     >({
       query: (params) => ({
