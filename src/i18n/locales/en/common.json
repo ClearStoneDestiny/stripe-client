@@ -80,6 +80,13 @@
     "sessionEyebrow": "Next session",
     "sessionTitle": "Your next launch is staged for a premium rig.",
     "title": "Pick a rig, launch a game, keep the billing flow moving.",
+    "accessActive": "Active",
+    "accessInactive": "Inactive",
+    "creditsSummary": "{{hours}} available. Next reset: {{reset}}.",
+    "loadingMetric": "Loading",
+    "noActivePlan": "No active plan",
+    "notScheduled": "Not scheduled",
+    "subscriptionSummary": "{{plan}} access. Current period ends: {{periodEnd}}.",
 
     "overviewCards": [
       {
@@ -96,20 +103,11 @@
       }
     ],
 
-    "stats": [
-      {
-        "label": "Play credits",
-        "value": "12.5h"
-      },
-      {
-        "label": "Current plan",
-        "value": "Frost Pro"
-      },
-      {
-        "label": "Avg. queue",
-        "value": "28s"
-      }
-    ]
+    "stats": {
+      "access": "Access",
+      "currentPlan": "Current plan",
+      "playCredits": "Play credits"
+    }
   },
 
   "BentoGallery": {
