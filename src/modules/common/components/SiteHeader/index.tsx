@@ -17,7 +17,7 @@ const publicNavItems = [
 
 const protectedNavItems = [
   { href: APP_ROUTES.HOME, label: "Home" },
-  { href: `${APP_ROUTES.HOME}#popular`, label: "Catalog" },
+  { href: APP_ROUTES.CATALOG, label: "Catalog" },
   { href: APP_ROUTES.BILLING, label: "Prices" },
 ];
 

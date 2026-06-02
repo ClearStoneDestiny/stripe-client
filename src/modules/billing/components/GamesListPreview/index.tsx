@@ -73,7 +73,7 @@ export const GamesListPreview = ({
   const totalCount = isSurprise
     ? surpriseData?.games.length || 0
     : Math.max(
-        (gamesData?.total || includedGamesCount) - previousGamesCount,
+        (gamesData?.meta.total || includedGamesCount) - previousGamesCount,
         0,
       );
 

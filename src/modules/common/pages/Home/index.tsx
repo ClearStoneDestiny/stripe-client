@@ -1,6 +1,10 @@
 import { ProductsCarousel } from "@product/components";
 import { apiSlice } from "@api/slices/apiSlice";
 import { useLogoutMutation } from "@auth/api/authApi";
+import {
+  useGetCurrentSubscriptionQuery,
+  useGetUserBalanceQuery,
+} from "@billing/api/billingApi";
 import { Button } from "@components/ui/button";
 import { LoadingButton, Reveal } from "@common/components";
 import { APP_ROUTES } from "@config/routes";
@@ -16,14 +20,11 @@ import { useSnackbar } from "notistack";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router";
+import { format } from "date-fns";
 
 export const HomePage = () => {
   const { t } = useTranslation("common", { keyPrefix: "HomePage" });
 
-  const stats = t("stats", { returnObjects: true }) as Array<{
-    label: string;
-    value: string;
-  }>;
   const overviewCards = t("overviewCards", { returnObjects: true }) as Array<{
     description: string;
     title: string;
@@ -34,6 +35,55 @@ export const HomePage = () => {
   const navigate = useNavigate();
 
   const [logout, { isLoading: isLoggingOut }] = useLogoutMutation();
+  const { data: balance, isLoading: isBalanceLoading } =
+    useGetUserBalanceQuery();
+  const { data: currentSubscriptionData, isLoading: isSubscriptionLoading } =
+    useGetCurrentSubscriptionQuery();
+
+  const subscription = currentSubscriptionData?.subscription;
+  const currentPlanName = subscription?.plan?.name ?? t("noActivePlan");
+  const hasActiveAccess = currentSubscriptionData?.hasActiveAccess ?? false;
+
+  const formatHours = (hours?: number) => {
+    if (hours === undefined) {
+      return t("loadingMetric");
+    }
+
+    return `${Number.isInteger(hours) ? hours : hours.toFixed(1)}h`;
+  };
+
+  const formatShortDate = (date?: string) => {
+    if (!date) {
+      return t("notScheduled");
+    }
+
+    try {
+      return format(new Date(date), "MMM d");
+    } catch {
+      return t("notScheduled");
+    }
+  };
+
+  const stats = [
+    {
+      label: t("stats.playCredits"),
+      value: isBalanceLoading
+        ? t("loadingMetric")
+        : formatHours(balance?.availableHours),
+    },
+    {
+      label: t("stats.currentPlan"),
+      value: isSubscriptionLoading ? t("loadingMetric") : currentPlanName,
+    },
+    {
+      label: t("stats.access"),
+      value: isSubscriptionLoading
+        ? t("loadingMetric")
+        : hasActiveAccess
+          ? t("accessActive")
+          : t("accessInactive"),
+    },
+  ];
 
   const handleLogout = async () => {
     try {
@@ -49,9 +99,11 @@ export const HomePage = () => {
   };
 
   return (
-    <main className="min-h-dvh bg-surface-hero pt-[calc(var(--header-height)+var(--space-12))] text-surface-hero-foreground">
-      <section className="relative overflow-hidden px-[var(--page-x)] pb-[var(--section-y)]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_12%,var(--brand-glow),transparent_30%),radial-gradient(circle_at_86%_20%,rgba(208,234,251,0.12),transparent_28%)]" />
+    <main className="relative min-h-dvh overflow-hidden bg-surface-hero text-surface-hero-foreground">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_9%,var(--brand-glow),transparent_30%),radial-gradient(circle_at_86%_16%,rgba(208,234,251,0.12),transparent_28%),linear-gradient(145deg,var(--surface-hero)_0%,var(--color-bg-surface)_54%,var(--color-bg-base)_100%)]" />
+      <div className="absolute inset-x-0 top-0 h-72 bg-gradient-to-b from-white/8 to-transparent" />
+
+      <section className="relative z-10 overflow-hidden px-[var(--page-x)] pt-[calc(var(--header-height)+var(--space-12))] pb-[var(--section-y)]">
         <div className="relative mx-auto grid max-w-[var(--content-max)] gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(340px,0.45fr)] lg:items-end">
           <Reveal>
             <p className="text-xs font-semibold tracking-widest text-brand-soft uppercase">
@@ -108,7 +160,7 @@ export const HomePage = () => {
       </section>
 
       <section
-        className="border-y border-glass-border px-[var(--page-x)] py-[var(--section-y)]"
+        className="relative z-10 border-y border-glass-border px-[var(--page-x)] py-[var(--section-y)]"
         id="popular"
       >
         <div className="mx-auto max-w-[var(--content-max)]">
@@ -126,7 +178,7 @@ export const HomePage = () => {
         </div>
       </section>
 
-      <section className="bg-surface-frost px-[var(--page-x)] py-[var(--section-y)] text-surface-frost-foreground">
+      <section className="relative z-10 bg-surface-frost px-[var(--page-x)] py-[var(--section-y)] text-surface-frost-foreground">
         <div className="mx-auto grid max-w-[var(--content-max)] gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
           <Reveal>
             <p className="text-xs font-semibold tracking-widest text-brand-deep uppercase">
@@ -164,7 +216,7 @@ export const HomePage = () => {
       </section>
 
       <section
-        className="px-[var(--page-x)] py-[var(--section-y)]"
+        className="relative z-10 px-[var(--page-x)] py-[var(--section-y)]"
         id="billing"
       >
         <Reveal className="mx-auto grid max-w-[var(--content-max)] gap-8 border border-glass-border bg-white/6 p-6 backdrop-blur-xl sm:p-8 lg:grid-cols-[1fr_auto] lg:items-center">
@@ -184,13 +236,23 @@ export const HomePage = () => {
             <div className="border border-glass-border bg-surface-hero/60 p-5">
               <Clock3 className="mb-4 size-5 text-brand-soft" />
               <p className="text-sm leading-6 text-surface-hero-muted">
-                20:00 simulated reservation window
+                {t("creditsSummary", {
+                  hours: isBalanceLoading
+                    ? t("loadingMetric")
+                    : formatHours(balance?.availableHours),
+                  reset: formatShortDate(balance?.nextResetAt),
+                })}
               </p>
             </div>
             <div className="border border-glass-border bg-surface-hero/60 p-5">
               <Gamepad2 className="mb-4 size-5 text-brand-soft" />
               <p className="text-sm leading-6 text-surface-hero-muted">
-                RTX-class rig profile ready for checkout
+                {t("subscriptionSummary", {
+                  plan: isSubscriptionLoading
+                    ? t("loadingMetric")
+                    : currentPlanName,
+                  periodEnd: formatShortDate(subscription?.currentPeriodEnd),
+                })}
               </p>
             </div>
           </div>

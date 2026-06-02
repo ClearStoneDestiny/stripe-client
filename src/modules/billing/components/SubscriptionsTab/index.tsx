@@ -9,7 +9,6 @@ import {
 } from "@billing/api/billingApi";
 import type { StripeSubscriptionStatusEnum } from "@billing/enums/stripeSubscriptionStatus";
 import { useSnackbar } from "notistack";
-import { format } from "date-fns";
 
 interface SubscriptionsTabProps {
   selectedProvider: PaymentProviderEnum;
@@ -45,20 +44,6 @@ export const SubscriptionsTab = ({
     : undefined;
 
   const handleCancelSubscription = async () => {
-    if (!currentSubscription?.currentPeriodEnd) {
-      return;
-    }
-
-    const confirmed = window.confirm(
-      t("confirmCancel", {
-        date: format(new Date(currentSubscription.currentPeriodEnd), "PPP"),
-      }),
-    );
-
-    if (!confirmed) {
-      return;
-    }
-
     try {
       await cancelSubscription({ immediately: false }).unwrap();
 
@@ -67,10 +52,12 @@ export const SubscriptionsTab = ({
       });
 
       await refetchSubscription();
+      return true;
     } catch {
       enqueueSnackbar(t("cancelError"), {
         variant: "error",
       });
+      return false;
     }
   };
 

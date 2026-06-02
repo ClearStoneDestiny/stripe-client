@@ -9,6 +9,16 @@ import { useTranslation } from "react-i18next";
 import { usePayment } from "@billing/hooks/usePayment";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@components/ui/alert-dialog";
 
 interface ISubscriptionPlanCardProps {
   plan: ISubscriptionPlanEntity;
@@ -18,7 +28,7 @@ interface ISubscriptionPlanCardProps {
   hasActiveSubscription?: boolean;
   previousGamesCount?: number;
   previousPlanName?: string;
-  onCancelSubscription?: () => void;
+  onCancelSubscription?: () => Promise<boolean>;
   isCanceling?: boolean;
   isCancelAtPeriodEnd?: boolean;
   currentPeriodEnd?: string;
@@ -40,6 +50,8 @@ export const SubscriptionPlanCard = ({
   const { t } = useTranslation("billing", {
     keyPrefix: "SubscriptionPlanCard",
   });
+
+  const [isCancelDialogOpen, setIsCancelDialogOpen] = useState(false);
 
   const defaultPrice = plan.prices.find((p) => p.isDefault) || plan.prices[0];
   const [selectedPriceId, setSelectedPriceId] = useState(defaultPrice?.id);
@@ -68,6 +80,18 @@ export const SubscriptionPlanCard = ({
     isActive && currentPeriodEnd
       ? format(new Date(currentPeriodEnd), "PPP")
       : "";
+
+  const handleConfirmCancel = async () => {
+    if (!onCancelSubscription || isCanceling) {
+      return;
+    }
+
+    const success = await onCancelSubscription();
+
+    if (success) {
+      setIsCancelDialogOpen(false);
+    }
+  };
 
   return (
     <article
@@ -182,16 +206,62 @@ export const SubscriptionPlanCard = ({
         </div>
       )}
 
-      {isActive && !isCancelAtPeriodEnd && (
-        <div className="flex justify-center mt-4">
-          <button
-            type="button"
-            onClick={onCancelSubscription}
-            disabled={isCanceling}
-            className="text-sm text-surface-hero-muted transition hover:text-red-400 disabled:opacity-50"
+      {isActive && !isCancelAtPeriodEnd && onCancelSubscription && (
+        <div className="mt-4 flex justify-center">
+          <AlertDialog
+            open={isCancelDialogOpen}
+            onOpenChange={(open) => {
+              if (isCanceling) return;
+              setIsCancelDialogOpen(open);
+            }}
           >
-            {isCanceling ? t("canceling") : t("cancelSubscription")}
-          </button>
+            <AlertDialogTrigger asChild>
+              <button
+                type="button"
+                disabled={isCanceling}
+                className="text-sm text-surface-hero-muted transition hover:text-red-400 disabled:opacity-50"
+              >
+                {isCanceling ? t("canceling") : t("cancelSubscription")}
+              </button>
+            </AlertDialogTrigger>
+
+            <AlertDialogContent className="border border-glass-border bg-slate-950/95 text-white backdrop-blur-xl">
+              <AlertDialogHeader>
+                <AlertDialogTitle>{t("cancelDialogTitle")}</AlertDialogTitle>
+
+                <AlertDialogDescription className="text-surface-hero-muted">
+                  {t("cancelDialogDescription", {
+                    date: formattedCurrentPeriodEnd,
+                  })}
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+
+              <AlertDialogFooter>
+                <AlertDialogCancel
+                  disabled={isCanceling}
+                  className="border border-glass-border bg-white/5 text-white hover:bg-white/10 hover:text-white disabled:opacity-50"
+                >
+                  {t("cancelDialogCancel")}
+                </AlertDialogCancel>
+
+                <Button
+                  type="button"
+                  onClick={handleConfirmCancel}
+                  disabled={isCanceling}
+                  className="bg-red-500 text-white hover:bg-red-600 disabled:opacity-50"
+                >
+                  {isCanceling ? (
+                    <>
+                      <Loader2 className="size-4 animate-spin" />
+                      {t("canceling")}
+                    </>
+                  ) : (
+                    t("cancelDialogConfirm")
+                  )}
+                </Button>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </div>
       )}
     </article>
