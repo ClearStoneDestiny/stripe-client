@@ -46,13 +46,11 @@ export const CatalogPage = () => {
   });
 
   const games = (data?.items ?? []) as IGamesExtendedEntity[];
-  const gamesFoundCount = data?.total ?? 0;
-  const selectedGameImage = resolveProductImageUrl(
-    selectedGame?.coverImageUrl,
-  );
+  const gamesFoundCount = data?.meta.total ?? 0;
+  const selectedGameImage = resolveProductImageUrl(selectedGame?.coverImageUrl);
 
   const totalPages = data
-    ? Math.ceil(data.total / config.PAGINATION.PRODUCTS_PAGE_SIZE)
+    ? Math.ceil(data.meta.total / config.PAGINATION.PRODUCTS_PAGE_SIZE)
     : 0;
 
   const handlePlanChange = (value: string) => {
@@ -229,7 +227,7 @@ export const CatalogPage = () => {
                     <Link to={APP_ROUTES.BILLING}>{t("viewPlans")}</Link>
                   </Button>
                   <Button
-                    className="border-glass-border text-white hover:bg-white/8"
+                    className="border-glass-border text-white hover:bg-white/8 hover:text-[var(--color-text-primary)] hover:opacity-100 cursor-pointer"
                     variant="outline"
                     onClick={() => setSelectedGame(null)}
                   >
