@@ -7,10 +7,6 @@ const normalizeUser = (data?: IGetMeOutput): IAuthUser | null => {
     return null;
   }
 
-  if ("user" in data) {
-    return data.user;
-  }
-
   return data;
 };
 

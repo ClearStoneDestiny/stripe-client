@@ -11,10 +11,9 @@ const canonicalizeBackendDomain = (value: string) => {
   try {
     const parsed = new URL(value);
     const normalizedPath = parsed.pathname.replace(/\/+$/, "");
-    const pathWithoutApi = normalizedPath.replace(/\/api$/i, "");
-    return `${parsed.origin}${pathWithoutApi}`;
+    return `${parsed.origin}${normalizedPath}`;
   } catch {
-    return value.replace(/\/+$/, "").replace(/\/api$/i, "");
+    return value.replace(/\/+$/, "");
   }
 };
 

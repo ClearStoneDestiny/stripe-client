@@ -77,7 +77,7 @@ const logout = async (
   await rawBaseQuery(
     {
       url: API_ENDPOINTS.AUTH.LOGOUT,
-      method: "POST",
+      method: "DELETE",
     },
     api,
     extraOptions ?? {},
